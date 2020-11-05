@@ -1,0 +1,35 @@
+{
+  "name": "rest-api-elbat",
+  "version": "1.0.0",
+  "description": "A rest api designed for a school project",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "genDoc": "node ./swagger/swagger_jsdoc.js",
+    "initDB": "node ./scripts/JS/initDB.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smartcity-ELBAT/REST-API.git"
+  },
+  "author": "Aurélie Bodart & Christophe Bernard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Smartcity-ELBAT/REST-API/issues"
+  },
+  "homepage": "https://github.com/Smartcity-ELBAT/REST-API#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.4.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "swagger-jsdoc": "^5.0.0"
+  }
+}
