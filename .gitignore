@@ -202,3 +202,4 @@ dist
 
 Vagrantfile
 .idea/dataSources.xml
+.idea/sqldialects.xml
