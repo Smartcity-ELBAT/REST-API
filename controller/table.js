@@ -16,7 +16,7 @@ module.exports.addTable = async (req, res) => {
                 await TableModel.addTable(client, idEstablishment, nbSeats, isOutside);
                 res.sendStatus(201);
             } else {
-                res.sendStatus(404); // TODO 400 ou 404 ? idEstablishment est incorrect
+                res.sendStatus(404);
             }
         } catch (error) {
             res.sendStatus(500);
@@ -37,7 +37,7 @@ module.exports.getAllTables = async (req, res) => {
             if(tables.length !== 0) {
                 res.json(tables);
             } else {
-                res.sendStatus(404); // TODO 400 ou 404 ?
+                res.sendStatus(404);
             }
         } catch(error) {
             res.sendStatus(500);
@@ -81,7 +81,7 @@ module.exports.updateTable = async (req, res) => {
         try {
             const rowsUpdated = await TableModel.updateTable(client, idTable, idEstablishment, isOutside);
             if(rowsUpdated.rowCount !== 0)
-                res.sendStatus(204); // TODO 200 avec contenu ou 204 sans contenu ?
+                res.sendStatus(200);
             else
                 res.sendStatus(404);
         } catch (error) {

@@ -1,11 +1,9 @@
-// TODO peut être récup les adresses liées aux établissements
-
 module.exports.getEstablishment = async (client, id) => {
-    return await client.query("SELECT * FROM establishment WHERE id = $1", [id]);
+    return await client.query("SELECT * FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code WHERE e.id = $1", [id]);
 }
 
 module.exports.getAllEstablishments = async (client) => {
-    return await client.query("SELECT * FROM establishment");
+    return await client.query("SELECT * FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code");
 }
 
 module.exports.addEstablishment = async (client, name, phoneNumber, TVANumber, email, category, idAddress) => {
