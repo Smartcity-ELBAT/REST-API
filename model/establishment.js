@@ -11,3 +11,33 @@ module.exports.addEstablishment = async (client, name, phoneNumber, TVANumber, e
     const values = [name, phoneNumber, TVANumber, email, category, idAddress];
     return await client.query(text, values);
 }
+
+module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATNumber, email, category) => {
+	return await client.query(`
+		UPDATE establishment SET name = $1, phone_number = $2, vat_number = $3, email = $4, category = $5 WHERE id = $6;
+	`, [ name, phoneNumber, VATNumber, email, category, id ]);
+}
+
+module.exports.deleteEstablishment = async (client, id, accessLevelKey) => {
+	return await client.query(`
+			DELETE FROM user_access_level WHERE access_level = $1
+		`, [ accessLevelKey ])
+			.then(
+				await client.query(`
+					DELETE FROM access_level WHERE access_level.access_level = $1
+				`, [ accessLevelKey ])
+          .then(
+            await client.query(`
+              DELETE FROM reservation WHERE establishment_id = $1
+            `, [ id ])
+              .then(
+                await client.query(`
+                  DELETE FROM table WHERE establishment_id = $1
+                `, [ id ])
+                .then(
+                  await client.query(`
+                    DELETE FROM establishment WHERE id = $1;
+                  `, [ id ])
+					  )
+			);
+}
