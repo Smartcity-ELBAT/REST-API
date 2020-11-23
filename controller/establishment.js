@@ -4,7 +4,7 @@ const Establishment = require("../model/establishment");
 const { allDefined } = require("../utils/values");
 
 // TODO: réfléchir à la partie tables à insérer (peut-être ancien count des tables et nouveau)
-module.exports.patch = async (req, res) => {
+module.exports.patchEstablishment = async (req, res) => {
 	const { id, name, phoneNumber, VATNumber, email, category } = req.body;
 	const { id: addressId, street, number, city, postalCode, country } = req.body.address;
 
@@ -17,7 +17,7 @@ module.exports.patch = async (req, res) => {
 			await client.query("BEGIN");
 
 			await Address.updateAddress(client, addressId, street, number, city, postalCode, country);
-			await Establishment.update(client, id, name, phoneNumber, VATNumber, email, category);
+			await Establishment.updateEstablishment(client, id, name, phoneNumber, VATNumber, email, category);
 
 			await client.query("COMMIT");
 		} catch (e) {
@@ -29,7 +29,7 @@ module.exports.patch = async (req, res) => {
 	}
 }
 
-module.exports.delete = async (req, res) => {
+module.exports.deleteEstablishment = async (req, res) => {
 	const { establishmentId, accessLevelKey } = req.body;
 
 	if (!allDefined(establishmentId, accessLevelKey)) res.sendStatus(404);
@@ -39,7 +39,7 @@ module.exports.delete = async (req, res) => {
 		try {
 			await client.query("BEGIN");
 
-			await Establishment.delete(client, establishmentId, accessLevelKey);
+			await Establishment.deleteEstablishment(client, establishmentId, accessLevelKey);
 
 			await client.query("COMMIT");
 		} catch (e) {
@@ -48,8 +48,8 @@ module.exports.delete = async (req, res) => {
 		} finally {
 			client.release();
 		}
-
 	}
+}
 
 module.exports.getEstablishment = async (req, res) => {
     const id = parseInt(req.params.id);
@@ -78,7 +78,7 @@ module.exports.getAllEstablishments = async (req, res) => {
     const client = await pool.connect();
     try {
         const { rows : establishments } = await Establishment.getAllEstablishments(client);
-        if(establishments.length != 0) {
+        if(establishments.length !== 0) {
             res.json(establishments);
         } else {
             res.sendStatus(404);

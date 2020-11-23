@@ -3,7 +3,7 @@ const { matchPasswords } = require("../utils/passwords");
 const { allDefined } = require("../utils/values");
 const pool = require("../model/database");
 const Person = require("../model/person");
-
+const AccessLevel = require("../model/accessLevel");
 
 module.exports.login = async (req, res) => {
 	const { username, password } = req.body;
@@ -13,13 +13,16 @@ module.exports.login = async (req, res) => {
 		const client = await pool.connect();
 
 		try {
-			const user = await Person.getPersonByUsername(client, username);
+			const user = await Person.getPersonByUsername(client, username.toLowerCase());
 
-			if (user === undefined || !await matchPasswords(password, user.password)) res.sendStatus(404)
+			if (user === undefined)
+				res.sendStatus(404);
+			else if (!await matchPasswords(password, user.password))
+				res.sendStatus(401);
 			else {
+				const { rows: accessLevels } = await AccessLevel.getUserAccessLevels(client, user.id);
 				const payload = {
-					accessLevel: user.accessLevel !== null ? user.accessLevel : "client",
-					establishment: user.establishmentId !== null ? user.establishmentId : undefined,
+					accessLevels: accessLevels,
 					userData: {
 						id: user.id,
 						username: user.username,

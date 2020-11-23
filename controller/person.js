@@ -1,13 +1,16 @@
 const Address = require("../model/address");
 const Person = require("../model/person");
 const pool = require("../model/database");
+const {numericValues} = require("../utils/values");
+const {getPasswordHash} = require("../utils/passwords");
 const { allDefined } = require("../utils/values");
 const { matchPasswords } = require("../utils/passwords");
 
 module.exports.getUser = async (req, res) => {
 	const username = req.params.username;
 
-	if (!allDefined(username)) res.sendStatus(400);
+	if (username !== undefined)
+		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
@@ -92,7 +95,7 @@ module.exports.addUser = async (req, res) => {
 
 			const addressId = await Address.addAddress(client, street, number, country, city, postalCode);
 			await Person.addPerson(
-				client,
+				client.toLowerCase(),
 				username,
 				await getPasswordHash(password),
 				lastName,
@@ -121,7 +124,8 @@ module.exports.updateUser = async (req, res) => {
 	const { id, firstName, lastName, birthDate, gender, phoneNumber, email } = req.body
 	const { addressId, street, number, postalCode, city, country } = req.body.address;
 
-	if (!allDefined(id, lastName, firstName, birthDate, gender, phoneNumber, email, addressId, street, number, country, city, postalCode))
+	if (!allDefined(lastName, firstName, birthDate, gender, phoneNumber, email, street, number, country, city, postalCode)
+	|| !numericValues(id, addressId))
 		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
@@ -148,12 +152,13 @@ module.exports.updateUser = async (req, res) => {
 module.exports.linkUserToEstablishment = async (req, res) => {
 	const { userId, establishmentId } = req.body;
 
-	if (!allDefined(userId, establishmentId)) res.sendStatus(400);
+	if (!numericValues(userId, establishmentId))
+		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
 		try {
-			await Person.linkEmployeeToEstablishment(client, userId, establishmentId);
+			await Person.linkToEstablishment(client, userId, establishmentId);
 		} catch (e) {
 			res.sendStatus(404);
 		} finally {

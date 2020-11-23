@@ -26,18 +26,17 @@ module.exports.deleteEstablishment = async (client, id, accessLevelKey) => {
 				await client.query(`
 					DELETE FROM access_level WHERE access_level.access_level = $1
 				`, [ accessLevelKey ])
-          .then(
-            await client.query(`
-              DELETE FROM reservation WHERE establishment_id = $1
-            `, [ id ])
-              .then(
-                await client.query(`
-                  DELETE FROM table WHERE establishment_id = $1
+			).then(
+				await client.query(`
+					DELETE FROM reservation WHERE establishment_id = $1
                 `, [ id ])
-                .then(
-                  await client.query(`
-                    DELETE FROM establishment WHERE id = $1;
-                  `, [ id ])
-					  )
+			).then(
+				await client.query(`
+					DELETE FROM "table" WHERE establishment_id = $1
+                `, [ id ])
+			).then(
+				await client.query(`
+					DELETE FROM establishment WHERE id = $1;
+				`, [ id ])
 			);
 }

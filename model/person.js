@@ -16,11 +16,9 @@ module.exports.getPersonByUsername = async (client, username) => {
 		SELECT person.id, username, password, last_name AS "lastName", first_name AS "firstName",
 		       birth_date AT TIME ZONE 'Europe/Brussels' AS "birthDate", gender, phone_number AS "phoneNumber", email,
 		       address.id AS "addressId", street, number, country, locality_city AS city,
-		       postal_code AS "postalCode", al.access_level AS "accessLevel", establishment_id AS "establishmentId"
+		       postal_code AS "postalCode"
 		FROM person
 		LEFT OUTER JOIN address ON person.address_id = address.id
-		LEFT OUTER JOIN user_access_level ual ON person.id = ual.user_id
-		LEFT OUTER JOIN access_level al ON ual.access_level = al.access_level
 		WHERE username = $1;
 	`, [ username ])).rows[0];
 }
