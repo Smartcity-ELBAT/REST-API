@@ -35,7 +35,8 @@ create table person (
     email text not null unique,
     is_positive_to_covid_19 bool,
     address_id int not null,
-    foreign key (address_id) references address(id)
+    foreign key (address_id) references address(id),
+    check ( email like '%@%.%' )
 );
 
 create table establishment (
@@ -46,7 +47,8 @@ create table establishment (
     email text unique,
     category text not null,
     address_id int not null,
-    foreign key (address_id) references address(id)
+    foreign key (address_id) references address(id),
+    check ( email like '%@%.%' )
 );
 
 create table "table" (
