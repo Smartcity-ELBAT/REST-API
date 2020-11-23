@@ -90,3 +90,11 @@ create table user_access_level (
     primary key (user_id, access_level)
 );
 
+insert into locality(city, postal_code) values ('fruitCity', '5100');
+insert into locality(city, postal_code) values ('PommeTown', '5300');
+
+insert into address (street, number, country, locality_city, postal_code)
+values ('rue des pommes', 5, 'Belgique', 'fruitCity', '5100');
+
+insert into address (street, number, country, locality_city, postal_code)
+VALUES ('rue des cerises', 10, 'Belgique', 'PommeTown', '5300');
