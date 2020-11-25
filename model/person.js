@@ -1,5 +1,5 @@
-module.exports.addPerson = async (client, username, password, lastName, firstName, birthDate, gender, phoneNumber, email, isWaiter, addressId) => {
-	return client.query(`
+module.exports.addPerson = async (client, username, password, lastName, firstName, birthDate, gender, phoneNumber, email, addressId) => {
+	return await client.query(`
         INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, address_id)
         VALUES ($1, $2, $3, $4, to_date($5, 'DD/MM/YYYY'), $6, $7, $8, $9) RETURNING *;
 	`, [username, password, lastName, firstName, birthDate, gender, phoneNumber, email, addressId]
@@ -18,7 +18,7 @@ module.exports.getPersonByUsername = async (client, username) => {
 		       address.id AS "addressId", street, number, country, locality_city AS city,
 		       postal_code AS "postalCode"
 		FROM person
-		LEFT OUTER JOIN address ON person.address_id = address.id
+		JOIN address ON person.address_id = address.id
 		WHERE username = $1;
 	`, [ username ])).rows[0];
 }

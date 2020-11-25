@@ -19,6 +19,7 @@ module.exports.addReservation = async (req, res) => {
             await client.query("COMMIT");
             res.sendStatus(201);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -35,13 +36,12 @@ module.exports.getClientReservations = async (req,res) => {
         try {
             const {rows : reservations } = await ReservationModel.getClientReservations(client, idClient);
             if(reservations.length !== 0) {
-                for (const row of reservations)
-                    console.log(new Date(row.timezone));
                 res.json(reservations);
             } else {
                 res.sendStatus(404);
             }
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -63,6 +63,7 @@ module.exports.getDayReservations = async (req, res) => {
                 res.sendStatus(404);
             }
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         }finally {
             client.release();
@@ -94,6 +95,7 @@ module.exports.updateReservation = async (req, res) => {
                 else
                     res.sendStatus(404);            }
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -114,6 +116,7 @@ module.exports.updateArrivingTime = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -134,6 +137,7 @@ module.exports.updateExitTime = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -154,6 +158,7 @@ module.exports.cancelReservation = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();

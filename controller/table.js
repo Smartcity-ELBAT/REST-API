@@ -19,6 +19,7 @@ module.exports.addTable = async (req, res) => {
                 res.sendStatus(404);
             }
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -40,6 +41,7 @@ module.exports.getAllTables = async (req, res) => {
                 res.sendStatus(404);
             }
         } catch(error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -65,6 +67,7 @@ module.exports.getTable = async (req, res) => {
                 res.sendStatus(404);
             }
         } catch(error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
@@ -105,6 +108,7 @@ module.exports.deleteTable = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         } finally {
             client.release();
