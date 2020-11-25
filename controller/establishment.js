@@ -1,23 +1,30 @@
 const pool = require ("../model/database");
 const Address = require("../model/address");
 const Establishment = require("../model/establishment");
-const { allDefined } = require("../utils/values");
+const { allDefined, numericValues } = require("../utils/values");
 
 // TODO: réfléchir à la partie tables à insérer (peut-être ancien count des tables et nouveau)
 module.exports.patchEstablishment = async (req, res) => {
 	const { id, name, phoneNumber, VATNumber, email, category } = req.body;
 	const { id: addressId, street, number, city, postalCode, country } = req.body.address;
 
-	if (!allDefined(id, name, phoneNumber, VATNumber, email, category, addressId, street, number, city, postalCode, country))
-		res.sendStatus(404);
+	if (!allDefined(name, phoneNumber, VATNumber, email, category, street, number, city, postalCode, country)
+		|| !numericValues(id, addressId))
+		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
 		try {
 			await client.query("BEGIN");
 
-			await Address.updateAddress(client, addressId, street, number, city, postalCode, country);
-			await Establishment.updateEstablishment(client, id, name, phoneNumber, VATNumber, email, category);
+			const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, city, postalCode, country);
+
+			if (updatedAddressRows.rowCount !== 0) {
+				const updatedEstablishmentRows = await Establishment.updateEstablishment(client, id, name, phoneNumber, VATNumber, email, category);
+
+				res.sendStatus(updatedEstablishmentRows !== 0 ? 200 : 404);
+			} else
+				res.sendStatus(404);
 
 			await client.query("COMMIT");
 		} catch (e) {
@@ -30,20 +37,23 @@ module.exports.patchEstablishment = async (req, res) => {
 }
 
 module.exports.deleteEstablishment = async (req, res) => {
-	const { establishmentId, accessLevelKey } = req.body;
+	const { establishmentId } = req.body;
 
-	if (!allDefined(establishmentId, accessLevelKey)) res.sendStatus(404);
+	if (isNaN(establishmentId)) res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
 		try {
 			await client.query("BEGIN");
 
-			await Establishment.deleteEstablishment(client, establishmentId, accessLevelKey);
+			const updatedRows = await Establishment.deleteEstablishment(client, establishmentId);
+			res.sendStatus(updatedRows.rowCount !== 0 ? 200 : 404);
 
 			await client.query("COMMIT");
 		} catch (e) {
 			await client.query("ROLLBACK");
+
+			console.log(e);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -67,6 +77,8 @@ module.exports.getEstablishment = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch(error) {
+	        console.log(error);
+
             res.sendStatus(500);
         } finally {
             client.release();
@@ -84,6 +96,8 @@ module.exports.getAllEstablishments = async (req, res) => {
             res.sendStatus(404);
         }
     } catch(error) {
+	    console.log(error);
+
         res.sendStatus(500);
     } finally {
         client.release();
@@ -91,30 +105,27 @@ module.exports.getAllEstablishments = async (req, res) => {
 }
 
 module.exports.addEstablishment = async (req, res) => {
-    const {name, phoneNumber, TVANumber, email, category} = req.body;
+    const {name, phoneNumber, VATNumber, email, category} = req.body;
     const {street, number, country, city, postalCode} = req.body.address;
 
-    if(name === undefined || phoneNumber === undefined || TVANumber === undefined || email === undefined || category === undefined  ||
-    street === undefined || isNaN(number) || country === undefined || city === undefined || postalCode === undefined) {
+    if (!allDefined(name, phoneNumber, VATNumber, email, category, street, number, country, city, postalCode)) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
-            /*
-            // TODO vérifier que ça fonctionne avec le code de Christophe
-                (penser à retirer l'idAdress hardcodé ligne 63 et décommenter l'import d'adresse !!!)
 
-            const idAddress = await AddressModel.addAddress(client, street, number, country, city, postalCode);
-            await EstablishmentModel.addEstablishment(client, name, phoneNumber, TVANumber, email, category, idAddress);
-             */
-            await Establishment.addEstablishment(client, name, phoneNumber, TVANumber, email, category, 2);
+            const idAddress = await Address.addAddress(client, street, number, country, city, postalCode);
+            await Establishment.addEstablishment(client, name, phoneNumber, VATNumber, email, category, idAddress);
 
             await client.query("COMMIT");
             res.sendStatus(201);
 
         } catch (error) {
             await client.query("ROLLBACK");
+
+            console.log(error);
+
             res.sendStatus(500);
         } finally {
             client.release();

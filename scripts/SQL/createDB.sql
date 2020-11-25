@@ -81,7 +81,7 @@ create table access_level (
     access_level text primary key,
     establishment_id int,
     foreign key (establishment_id) references establishment(id),
-    check (access_level.access_level in ('admin', 'waiter', 'customer'))
+    check (access_level.access_level similar to 'admin|waiter%|customer')
 );
 
 create table user_access_level (
@@ -100,3 +100,5 @@ values ('rue des pommes', 5, 'Belgique', 'fruitCity', '5100');
 
 insert into address (street, number, country, locality_city, postal_code)
 VALUES ('rue des cerises', 10, 'Belgique', 'PommeTown', '5300');
+
+insert into access_level (access_level) VALUES ('customer');
