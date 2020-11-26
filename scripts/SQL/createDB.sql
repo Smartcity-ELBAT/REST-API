@@ -108,13 +108,13 @@ insert into address (street, number, country, locality_city, postal_code)
 VALUES ('rue des poires', 20, 'Belgique', 'Wépion', '5100');
 
 insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id)
-VALUES ('pomme123', '$2b$10$GTjeVpITeh6K.Oh8oGq5NOn/Ywvd5Hnruc6HUCyfeCQF2hP6EdIW.', 'fruit', 'pomme', '2015-05-10', 'f', '1234567890', 'pomme@fruit.be', null, '1' );
+VALUES ('pomme123', '$2b$10$GTjeVpITeh6K.Oh8oGq5NOn/Ywvd5Hnruc6HUCyfeCQF2hP6EdIW.', 'Fruit', 'Pomme', '2015-05-10', 'f', '1234567890', 'pomme@fruit.be', null, '1' );
 
 insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id)
-VALUES ('poire123', '$2b$10$5fixCge7j6I2BLSGlQ7eV.YGrKLaK.nsdglpZ4Hg3P2etvqUUCAvK', 'fruit', 'poire', '2013-08-18', 'm', '0147852369', 'poire@fruit.be', null, '4' );
+VALUES ('poire123', '$2b$10$5fixCge7j6I2BLSGlQ7eV.YGrKLaK.nsdglpZ4Hg3P2etvqUUCAvK', 'Fruit', 'Poire', '2013-08-18', 'm', '0147852369', 'poire@fruit.be', null, '4' );
 
 insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id)
-VALUES ('kiwi123', '$2b$10$7APucUJHm93.lIZYGuv.EegpIXWRu9VXKH4PfEwWzOXEScQCbiDfy', 'fruit', 'kiwi', '2010-05-20', 'm', '0147852396', 'kiwi@fruit.be', null, '2' );
+VALUES ('kiwi123', '$2b$10$7APucUJHm93.lIZYGuv.EegpIXWRu9VXKH4PfEwWzOXEScQCbiDfy', 'Fruit', 'Kiwi', '2010-05-20', 'm', '0147852396', 'kiwi@fruit.be', null, '2' );
 
 insert into establishment (name, phone_number, vat_number, email, category, address_id)
 VALUES ('Sams Lunch', '9876543210', 'BE9874563210', 'samslunch@restau.be', 'sandwicherie', 1);
