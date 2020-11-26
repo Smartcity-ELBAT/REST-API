@@ -40,7 +40,8 @@ module.exports.getUser = async (req, res) => {
 
 				res.json(userToSend);
 			} else res.sendStatus(404);
-		} catch (e) {
+		} catch (error) {
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -52,13 +53,15 @@ module.exports.getAllUsers = async (req, res) => {
 	const client = await pool.connect();
 
 	try {
-		const { rows: users } = Person.getAllUsers(client);
+		const { rows: users } = await Person.getAllUsers(client);
 
-		if (users === undefined) res.sendStatus(404);
+		if (users.rowCount === 0)
+			res.sendStatus(404);
 		else {
 			res.json(users);
 		}
-	} catch (e) {
+	} catch (error) {
+		console.log(error);
 		res.sendStatus(500);
 	} finally {
 		client.release();
@@ -75,7 +78,6 @@ module.exports.addUser = async (req, res) => {
 		gender,
 		phoneNumber,
 		email,
-		isWaiter
 	} = req.body;
 	const {
 		street,
@@ -86,7 +88,7 @@ module.exports.addUser = async (req, res) => {
 	} = req.body.address;
 
 	if (!allDefined(username, password, lastName, firstName, birthDate, gender, phoneNumber, email, street, number, country, city, postalCode))
-		res.sendStatus(404);
+		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
@@ -95,8 +97,8 @@ module.exports.addUser = async (req, res) => {
 
 			const addressId = await Address.addAddress(client, street, number, country, city, postalCode);
 			await Person.addPerson(
-				client.toLowerCase(),
-				username,
+				client,
+				username.toLowerCase(),
 				await getPasswordHash(password),
 				lastName,
 				firstName,
@@ -104,15 +106,14 @@ module.exports.addUser = async (req, res) => {
 				gender,
 				phoneNumber,
 				email,
-				isWaiter,
 				addressId
 			);
 
 			await client.query("COMMIT");
 			res.sendStatus(201);
-		} catch (e) {
+		} catch (error) {
 			await client.query("ROLLBACK");
-			console.log(e);
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -135,13 +136,15 @@ module.exports.updateUser = async (req, res) => {
 			await Address.updateAddress(client, addressId, street, number, country, city, postalCode);
 
 			res.sendStatus(
+				// TODO pas undefined mais rowCount === 0 -> 404
 				await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber, email) !== undefined ?
 					200 : 404
 			);
 
 			await client.query("COMMIT");
-		} catch (e) {
+		} catch (error) {
 			await client.query("ROLLBACK");
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -159,7 +162,8 @@ module.exports.linkUserToEstablishment = async (req, res) => {
 
 		try {
 			await Person.linkToEstablishment(client, userId, establishmentId);
-		} catch (e) {
+		} catch (error) {
+			console.log(error);
 			res.sendStatus(404);
 		} finally {
 			client.release();
@@ -167,7 +171,6 @@ module.exports.linkUserToEstablishment = async (req, res) => {
 	}
 }
 
-// TODO: ce serait mieux de traiter ça en session utilisateur
 module.exports.updatePassword = async (req, res) => {
 	const { userId: username, currentPassword, newPassword } = req.body;
 
@@ -180,7 +183,8 @@ module.exports.updatePassword = async (req, res) => {
 
 			if (matchPasswords(currentPassword, user.password))
 				await Person.updatePassword(client, user.id, getPasswordHash(newPassword));
-		} catch (e) {
+		} catch (error) {
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
