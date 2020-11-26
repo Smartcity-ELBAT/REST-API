@@ -18,13 +18,56 @@ module.exports.getUser = async (req, res) => {
 			if (user !== undefined) {
 				const userToSend = {
 					id: user.id,
-					username: user.username,
+					username: username,
 					password: user.password,
 					lastName: user.lastName,
 					firstName: user.firstName,
 					birthDate: new Date(user.birthDate),
 					gender: user.gender,
 					phoneNumber: user.phoneNumber,
+					email: user.email,
+					address: {
+						id: user.addressId,
+						street: user.street,
+						number: user.number,
+						city: user.city,
+						postalCode: user.postalCode,
+						country: user.country
+					}
+				};
+
+				res.json(userToSend);
+			} else res.sendStatus(404);
+		} catch (error) {
+			console.log(error);
+			res.sendStatus(500);
+		} finally {
+			client.release();
+		}
+	}
+}
+
+module.exports.getUserByPhoneNumber = async (req, res) => {
+	const phoneNumber = req.params.phoneNumber;
+
+	if (phoneNumber === undefined)
+		res.sendStatus(400);
+	else {
+		const client = await pool.connect();
+
+		try {
+			const user = await Person.getPersonByPhoneNumber(client, phoneNumber);
+
+			if (user !== undefined) {
+				const userToSend = {
+					id: user.id,
+					username: user.username,
+					password: user.password,
+					lastName: user.lastName,
+					firstName: user.firstName,
+					birthDate: new Date(user.birthDate),
+					gender: user.gender,
+					phoneNumber: phoneNumber,
 					email: user.email,
 					address: {
 						id: user.addressId,
