@@ -18,8 +18,8 @@ module.exports.getPersonByUsername = async (client, username) => {
 		       address.id AS "addressId", street, number, country, locality_city AS city,
 		       postal_code AS "postalCode"
 		FROM person
-		LEFT OUTER JOIN address ON person.address_id = address.id
-		WHERE username like $1;
+		JOIN address ON person.address_id = address.id
+		WHERE username = $1;
 	`, [ username ])).rows[0];
 }
 

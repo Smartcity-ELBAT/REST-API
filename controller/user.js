@@ -8,7 +8,8 @@ const AccessLevel = require("../model/accessLevel");
 module.exports.login = async (req, res) => {
 	const { username, password } = req.body;
 
-	if (!allDefined(username, password)) res.sendStatus(400);
+	if (!allDefined(username, password))
+		res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
@@ -43,10 +44,12 @@ module.exports.login = async (req, res) => {
 						}
 					}
 				}
-
-				res.json(await jwt.sign(payload, process.env.JWT_TOKEN, { expiresIn: "24h"}));
+				// TODO réfléchir à la durée du token, 24h me semble long
+				const token = jwt.sign(payload, process.env.JWT_TOKEN, { expiresIn: "24h"});
+				res.json(token);
 			}
-		} catch (e) {
+		} catch (error) {
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();

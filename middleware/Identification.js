@@ -1,13 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-module.exports.identification = async (req, res, next) => {
-	const code = req.get("authorization");
 
-	if (code !== undefined && code.includes("Bearer")) {
-		const authCode = code.split(".")[1];
+module.exports.identification = async (req, res, next) => {
+	const headerAuth = req.get("authorization");
+
+	if (headerAuth !== undefined && headerAuth.includes("Bearer")) {
+		const jwtToken = headerAuth.split(" ")[1];
 
 		try {
-			req.session = jwt.verify(authCode, process.env.JWT_SECRET);
+			const decodedToken = jwt.verify(jwtToken, process.env.JWT_TOKEN);
+			req.session = decodedToken.userData;
+			req.session.authLevels = decodedToken.accessLevels;
 			next();
 		} catch (e) {
 			console.log(e);

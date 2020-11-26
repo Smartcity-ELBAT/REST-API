@@ -38,7 +38,8 @@ module.exports.getUser = async (req, res) => {
 
 				res.json(userToSend);
 			} else res.sendStatus(404);
-		} catch (e) {
+		} catch (error) {
+			console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -52,12 +53,13 @@ module.exports.getAllUsers = async (req, res) => {
 	try {
 		const { rows: users } = await Person.getAllUsers(client);
 
-		if (users === undefined)
+		if (users.rowCount === 0)
 			res.sendStatus(404);
 		else {
 			res.json(users);
 		}
-	} catch (e) {
+	} catch (error) {
+		console.log(error);
 		res.sendStatus(500);
 	} finally {
 		client.release();
@@ -107,12 +109,12 @@ module.exports.addUser = async (req, res) => {
 
 			await client.query("COMMIT");
 			res.sendStatus(201);
-		} catch (e) {
+		} catch (error) {
 			await client.query("ROLLBACK");
 
-			console.log(e);
+			console.log(error);
 
-			res.sendStatus(500);
+      res.sendStatus(500);
 		} finally {
 			client.release();
 		}
@@ -136,16 +138,18 @@ module.exports.updateUser = async (req, res) => {
 			if (updatedAddressRows.rowCount !== 0) {
 				const updatedUserRows = await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber, email);
 
+  			await client.query("COMMIT");
 				res.sendStatus(updatedUserRows.rowCount !== 0 ? 200 : 404);
-			} else
-				res.sendStatus(404);
-
-			await client.query("COMMIT");
+			} else {
+			  await client.query("ROLLBACK");
+				 
+        res.sendStatus(404);
+      }
 		} catch (e) {
 			console.log(e);
-
+      
 			await client.query("ROLLBACK");
-
+      
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -205,7 +209,6 @@ module.exports.unlinkUserFromEstablishment = async (req, res) => {
 	}
 }
 
-// TODO: ce serait mieux de traiter ça en session utilisateur
 module.exports.updatePassword = async (req, res) => {
 	const { username, currentPassword, newPassword } = req.body;
 

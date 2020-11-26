@@ -23,12 +23,15 @@ module.exports.patchEstablishment = async (req, res) => {
 				const updatedEstablishmentRows = await Establishment.updateEstablishment(client, id, name, phoneNumber, VATNumber, email, category);
 
 				res.sendStatus(updatedEstablishmentRows !== 0 ? 200 : 404);
-			} else
+			  await client.query("COMMIT");
+      } else {
 				res.sendStatus(404);
-
-			await client.query("COMMIT");
-		} catch (e) {
+        await client.query("ROLLBACK");
+      }
+			
+		} catch (error) {
 			await client.query("ROLLBACK");
+            console.log(error);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -39,7 +42,8 @@ module.exports.patchEstablishment = async (req, res) => {
 module.exports.deleteEstablishment = async (req, res) => {
 	const { establishmentId } = req.body;
 
-	if (isNaN(establishmentId)) res.sendStatus(400);
+	if (isNaN(establishmentId))
+    res.sendStatus(400);
 	else {
 		const client = await pool.connect();
 
@@ -50,11 +54,12 @@ module.exports.deleteEstablishment = async (req, res) => {
 			res.sendStatus(updatedRows.rowCount !== 0 ? 200 : 404);
 
 			await client.query("COMMIT");
-		} catch (e) {
+		} catch (error) {
 			await client.query("ROLLBACK");
-
-			console.log(e);
-			res.sendStatus(500);
+      
+      console.log(error);
+			
+      res.sendStatus(500);
 		} finally {
 			client.release();
 		}
@@ -69,7 +74,7 @@ module.exports.getEstablishment = async (req, res) => {
         const client = await pool.connect();
         try {
             // récup en 2 étape sinon on récup plein d'infos en plus des establishments
-            const {rows : establishments} = await Establishment.getEstablishment(client, id);
+            const {rows : establishments} = await EstablishmentModel.getEstablishment(client, id);
             const establishment = establishments[0];
 
             if(establishment !== undefined)
@@ -77,8 +82,8 @@ module.exports.getEstablishment = async (req, res) => {
             else
                 res.sendStatus(404);
         } catch(error) {
-	        console.log(error);
-
+            console.log(error);
+          
             res.sendStatus(500);
         } finally {
             client.release();
@@ -89,7 +94,7 @@ module.exports.getEstablishment = async (req, res) => {
 module.exports.getAllEstablishments = async (req, res) => {
     const client = await pool.connect();
     try {
-        const { rows : establishments } = await Establishment.getAllEstablishments(client);
+        const { rows : establishments } = await EstablishmentModel.getAllEstablishments(client);
         if(establishments.length !== 0) {
             res.json(establishments);
         } else {
@@ -97,8 +102,8 @@ module.exports.getAllEstablishments = async (req, res) => {
         }
     } catch(error) {
 	    console.log(error);
-
-        res.sendStatus(500);
+      
+      res.sendStatus(500);
     } finally {
         client.release();
     }
@@ -125,7 +130,7 @@ module.exports.addEstablishment = async (req, res) => {
             await client.query("ROLLBACK");
 
             console.log(error);
-
+          
             res.sendStatus(500);
         } finally {
             client.release();

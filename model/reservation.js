@@ -7,7 +7,7 @@
 
 // Android
 module.exports.getClientReservations = async (client, idPerson) => {
-    const text = "SELECT person_id, date_time_reserved at time zone 'Europe/Brussels', arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id FROM reservation WHERE person_id = $1";
+    const text = "SELECT person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id FROM reservation WHERE person_id = $1";
     return client.query(text, [idPerson]);
 }
 

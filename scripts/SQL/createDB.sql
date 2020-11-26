@@ -62,7 +62,7 @@ create table "table" (
 
 create table reservation (
     person_id int,
-    date_time_reserved timestamp,
+    date_time_reserved timestamptz,
     arriving_time time,
     exit_time time,
     customers_nbr int not null,
@@ -115,6 +115,7 @@ VALUES ('poire123', '$2b$10$5fixCge7j6I2BLSGlQ7eV.YGrKLaK.nsdglpZ4Hg3P2etvqUUCAv
 
 insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id)
 VALUES ('kiwi123', '$2b$10$7APucUJHm93.lIZYGuv.EegpIXWRu9VXKH4PfEwWzOXEScQCbiDfy', 'Fruit', 'Kiwi', '2010-05-20', 'm', '0147852396', 'kiwi@fruit.be', null, '2' );
+
 insert into establishment (name, phone_number, vat_number, email, category, address_id)
 VALUES ('Sams Lunch', '9876543210', 'BE9874563210', 'samslunch@restau.be', 'sandwicherie', 1);
 
