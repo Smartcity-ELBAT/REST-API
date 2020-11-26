@@ -1,13 +1,13 @@
 const EstablishmentController = require("../controller/establishment");
-const IdentificationJWTMiddelWare = require("../middleware/Identification");
-const AuthorizationMiddelWare = require("../middleware/Authorization");
+const IdentificationJWTMiddleWare = require("../middleware/Identification");
+const AuthorizationMiddleWare = require("../middleware/Authorization");
 const Router = require("express-promise-router");
 const router = new Router;
 
-router.get("/:id",IdentificationJWTMiddelWare.identification, EstablishmentController.getEstablishment);
-router.get("/", IdentificationJWTMiddelWare.identification, EstablishmentController.getAllEstablishments);
-router.post("/", IdentificationJWTMiddelWare.identification, AuthorizationMiddelWare.mustBeAdmin, EstablishmentController.addEstablishment);
-router.patch("/", IdentificationJWTMiddelWare.identification, AuthorizationMiddelWare.mustBeAdmin, EstablishmentController.patchEstablishment);
-router.delete("/", IdentificationJWTMiddelWare.identification, AuthorizationMiddelWare.mustBeAdmin, EstablishmentController.deleteEstablishment);
+router.get("/:id",IdentificationJWTMiddleWare.identification, EstablishmentController.getEstablishment);
+router.get("/", IdentificationJWTMiddleWare.identification, EstablishmentController.getAllEstablishments);
+router.post("/", IdentificationJWTMiddleWare.identification, AuthorizationMiddleWare.mustBeAdmin, EstablishmentController.addEstablishment);
+router.patch("/", IdentificationJWTMiddleWare.identification, AuthorizationMiddleWare.mustBeAdmin, EstablishmentController.patchEstablishment);
+router.delete("/", IdentificationJWTMiddleWare.identification, AuthorizationMiddleWare.mustBeAdmin, EstablishmentController.deleteEstablishment);
 
 module.exports = router;
