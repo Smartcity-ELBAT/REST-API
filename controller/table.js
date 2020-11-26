@@ -1,10 +1,11 @@
 const pool = require('../model/database');
 const TableModel = require('../model/table');
 const EstablishmentModel = require('../model/establishment');
+const { allDefined, numericValues } = require("../utils/values");
 
 module.exports.addTable = async (req, res) => {
     const {idEstablishment, nbSeats, isOutside} = req.body;
-    if(isNaN(idEstablishment) || nbSeats === undefined || isOutside === undefined) {
+    if(isNaN(idEstablishment) || !allDefined(nbSeats, isOutside)) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();
@@ -77,7 +78,7 @@ module.exports.getTable = async (req, res) => {
 
 module.exports.updateTable = async (req, res) => {
     const {idTable, idEstablishment, isOutside} = req.body;
-    if(isNaN(idTable) || isNaN(idEstablishment) || isOutside === undefined) {
+    if(!numericValues(idTable, idEstablishment) || isOutside === undefined) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();

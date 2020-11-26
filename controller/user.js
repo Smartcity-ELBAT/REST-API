@@ -30,11 +30,12 @@ module.exports.login = async (req, res) => {
 						password: user.password,
 						lastName: user.lastName,
 						firstName: user.firstName,
-						birthDate: new Date(user.birthDate),
+						birthDate: user.birthDate,
 						gender: user.gender,
 						phoneNumber: user.phoneNumber,
 						email: user.email,
 						address: {
+							id: user.addressId,
 							street: user.street,
 							number: user.number,
 							city: user.city,

@@ -1,26 +1,30 @@
 const pool = require('../model/database');
 const ReservationModel = require("../model/reservation");
 const TableModel = require("../model/table");
+const { numericValues, allDefined } = require("../utils/values");
 
 module.exports.addReservation = async (req, res) => {
-    const {idPerson, dateTimeReserved, nbCustomers, idTable, idEstablishment, additionnalInformation} = req.body;
+    const {idPerson, dateTimeReserved, nbCustomers, idTable, idEstablishment, additionalInformation} = req.body;
 
-    if(isNaN(idPerson) || dateTimeReserved === undefined || isNaN(nbCustomers) || isNaN(idTable) || isNaN(idEstablishment)) {
+    if (!numericValues(idPerson, nbCustomers, idTable, idEstablishment) || dateTimeReserved === undefined)
         res.sendStatus(400);
-    } else {
+    else {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
             await ReservationModel.addReservation(client, idPerson, dateTimeReserved, nbCustomers, idTable, idEstablishment);
 
-            if(additionnalInformation !== undefined)
-                await ReservationModel.updateAdditionalInformations(client, idPerson, dateTimeReserved, additionnalInformation);
+            if(additionalInformation !== undefined)
+                await ReservationModel.updateAdditionalInformations(client, idPerson, dateTimeReserved, additionalInformation);
 
             await client.query("COMMIT");
             res.sendStatus(201);
         } catch (error) {
-            console.log(error);
-            res.sendStatus(500);
+          await client.query("ROLLBACK");
+            
+          console.log(error);
+          
+          res.sendStatus(500);
         } finally {
             client.release();
         }
@@ -43,6 +47,8 @@ module.exports.getClientReservations = async (req,res) => {
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
+
+            console.log(error);
         } finally {
             client.release();
         }
@@ -65,6 +71,8 @@ module.exports.getDayReservations = async (req, res) => {
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
+
+            console.log(error);
         }finally {
             client.release();
         }
@@ -73,9 +81,10 @@ module.exports.getDayReservations = async (req, res) => {
 
 module.exports.updateReservation = async (req, res) => {
     const {idPerson, dateTimeReserved, newDateTime, nbCustomers, addInfos, idTable, idEstablishment} = req.body
-    if(isNaN(idPerson) || dateTimeReserved === undefined || isNaN(nbCustomers) || isNaN(idTable) || isNaN(idEstablishment)) {
+
+    if (!numericValues(idPerson, nbCustomers, idTable, idEstablishment) || dateTimeReserved === undefined)
         res.sendStatus(400);
-    } else {
+    else {
         const client = await pool.connect();
         try {
             const table = await TableModel.getTable(client, idTable, idEstablishment);
@@ -90,13 +99,14 @@ module.exports.updateReservation = async (req, res) => {
                                                                             addInfos,
                                                                             idTable,
                                                                             idEstablishment);
-                if(rowsUpdated.rowCount !== 0)
-                    res.sendStatus(204);
-                else
-                    res.sendStatus(404);            }
+
+                res.sendStatus(rowsUpdated.rowCount !== 0 ? 200 : 404);
+            }
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
+
+            console.log(error);
         } finally {
             client.release();
         }
@@ -105,6 +115,7 @@ module.exports.updateReservation = async (req, res) => {
 
 module.exports.updateArrivingTime = async (req, res) => {
     const {idPerson, dateTimeReserved, arrivingTime} = req.body;
+
     if(isNaN(idPerson) || dateTimeReserved === undefined || arrivingTime === undefined) {
         res.sendStatus(400);
     } else {
@@ -118,6 +129,8 @@ module.exports.updateArrivingTime = async (req, res) => {
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
+
+            console.log(error);
         } finally {
             client.release();
         }
@@ -126,9 +139,9 @@ module.exports.updateArrivingTime = async (req, res) => {
 
 module.exports.updateExitTime = async (req, res) => {
     const {idPerson, dateTimeReserved, exitTime} = req.body;
-    if(isNaN(idPerson) || dateTimeReserved === undefined || exitTime === undefined) {
+    if(isNaN(idPerson) || allDefined(dateTimeReserved, exitTime))
         res.sendStatus(400);
-    } else {
+    else {
         const client = await pool.connect();
         try {
             const rowsUpdated = await ReservationModel.updateExitTime(client, idPerson, dateTimeReserved, exitTime);
@@ -139,6 +152,8 @@ module.exports.updateExitTime = async (req, res) => {
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
+
+            console.log(error);
         } finally {
             client.release();
         }
