@@ -3,10 +3,9 @@ const Address = require("../model/address");
 const Establishment = require("../model/establishment");
 const { allDefined, numericValues } = require("../utils/values");
 
-// TODO: réfléchir à la partie tables à insérer (peut-être ancien count des tables et nouveau)
 module.exports.patchEstablishment = async (req, res) => {
-	const { id, name, phoneNumber, VATNumber, email, category } = req.body;
-	const { id: addressId, street, number, city, postalCode, country } = req.body.address;
+	const { id, name, phoneNumber, VATNumber, email, category, addressId, street, number, city, postalCode, country } = req.body;
+
 
 	if (!allDefined(name, phoneNumber, VATNumber, email, category, street, number, city, postalCode, country)
 		|| !numericValues(id, addressId))
@@ -50,16 +49,16 @@ module.exports.deleteEstablishment = async (req, res) => {
 		try {
 			await client.query("BEGIN");
 
-			const updatedRows = await Establishment.deleteEstablishment(client, establishmentId);
-			res.sendStatus(updatedRows.rowCount !== 0 ? 200 : 404);
+			const deletedRows = await Establishment.deleteEstablishment(client, establishmentId);
+			res.sendStatus(deletedRows.rowCount !== 0 ? 200 : 404);
 
 			await client.query("COMMIT");
 		} catch (error) {
 			await client.query("ROLLBACK");
       
-      console.log(error);
-			
-      res.sendStatus(500);
+          console.log(error);
+
+          res.sendStatus(500);
 		} finally {
 			client.release();
 		}
@@ -74,7 +73,7 @@ module.exports.getEstablishment = async (req, res) => {
         const client = await pool.connect();
         try {
             // récup en 2 étape sinon on récup plein d'infos en plus des establishments
-            const {rows : establishments} = await EstablishmentModel.getEstablishment(client, id);
+            const {rows : establishments} = await Establishment.getEstablishment(client, id);
             const establishment = establishments[0];
 
             if(establishment !== undefined)
@@ -94,7 +93,7 @@ module.exports.getEstablishment = async (req, res) => {
 module.exports.getAllEstablishments = async (req, res) => {
     const client = await pool.connect();
     try {
-        const { rows : establishments } = await EstablishmentModel.getAllEstablishments(client);
+        const { rows : establishments } = await Establishment.getAllEstablishments(client);
         if(establishments.length !== 0) {
             res.json(establishments);
         } else {
@@ -110,8 +109,7 @@ module.exports.getAllEstablishments = async (req, res) => {
 }
 
 module.exports.addEstablishment = async (req, res) => {
-    const {name, phoneNumber, VATNumber, email, category} = req.body;
-    const {street, number, country, city, postalCode} = req.body.address;
+    const {name, phoneNumber, VATNumber, email, category, street, number, country, city, postalCode} = req.body;
 
     if (!allDefined(name, phoneNumber, VATNumber, email, category, street, number, country, city, postalCode)) {
         res.sendStatus(400);
@@ -121,10 +119,12 @@ module.exports.addEstablishment = async (req, res) => {
             await client.query("BEGIN");
 
             const idAddress = await Address.addAddress(client, street, number, country, city, postalCode);
-            await Establishment.addEstablishment(client, name, phoneNumber, VATNumber, email, category, idAddress);
+            const idEstablishment = await Establishment.addEstablishment(client, name, phoneNumber, VATNumber, email, category, idAddress);
 
             await client.query("COMMIT");
-            res.sendStatus(201);
+            res.json(idEstablishment);
+            //res.sendStatus(201);
+            // TODO renvoyer 201 et l'id ?
 
         } catch (error) {
             await client.query("ROLLBACK");
