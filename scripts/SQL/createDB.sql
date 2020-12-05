@@ -52,10 +52,11 @@ create table establishment (
 );
 
 create table "table" (
-    id int generated always as identity primary key,
+    id int generated always as identity,
     establishment_id int not null,
     seats_nbr int not null,
     is_outside bool not null,
+    primary key (id, establishment_id),
     foreign key (establishment_id) references establishment(id),
     check (seats_nbr >= 1 and seats_nbr <= 8)
 );
@@ -72,8 +73,7 @@ create table reservation (
     establishment_id int not null,
     foreign key (person_id) references person(id),
     primary key (person_id, date_time_reserved),
-    foreign key (table_id) references "table" (id),
-    foreign key (establishment_id) references establishment(id),
+    foreign key (table_id, establishment_id) references "table" (id, establishment_id),
     check (customers_nbr >= 1 and customers_nbr <= 8)
 );
 
@@ -145,7 +145,7 @@ insert into reservation (person_id, date_time_reserved, arriving_time, exit_time
 VALUES (1, '2020-10-12 20:30', null, null, 4, null, null, 1, 1);
 
 insert into reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id)
-VALUES (2, '2020-11-15 19:30', null, null, 6, null, null, 2, 2);
+VALUES (2, '2020-11-15 19:30', null, null, 6, null, null, 4, 2);
 
 insert into reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id)
 VALUES (2, '2020-05-26 21:30', null, null, 2, null, null, 3, 2);

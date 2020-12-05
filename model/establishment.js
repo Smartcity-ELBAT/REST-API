@@ -3,18 +3,27 @@ module.exports.getEstablishment = async (client, id) => {
 }
 
 module.exports.getAllEstablishments = async (client) => {
-    return await client.query("SELECT * FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code");
+    return await client.query(`SELECT e.address_id AS "addressId", e.category, l.city, a.country, e.email, e.id, a.locality_city AS "locality", 
+       e.name, a.number, e.phone_number AS "phoneNumber", l.postal_code AS "postalCode", a.street, e.vat_number AS "VATNumber" 
+	   FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code`);
 }
 
 module.exports.addEstablishment = async (client, name, phoneNumber, VATNumber, email, category, idAddress) => {
     const text = `INSERT INTO establishment (name, phone_number, vat_number, email, category, address_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
     const values = [name, phoneNumber, VATNumber, email, category, idAddress];
-    return client.query(text, values)
+
+    await client.query(text, values)
 	    .then(async (value) => {
 	    	await client.query(`INSERT INTO access_level (access_level, establishment_id) VALUES ($1, $2);`,
 		    [ "waiter_E" + value.rows[0].id, value.rows[0].id ])
 	    });
+
+	return (await client.query(`
+		SELECT id, LAST_VALUE (id) OVER(ORDER BY id DESC) id FROM establishment;
+	`)).rows[0].id;
 }
+
+
 
 module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATNumber, email, category) => {
 	return await client.query(`
