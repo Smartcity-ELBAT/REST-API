@@ -16,27 +16,7 @@ module.exports.getUser = async (req, res) => {
 			const user = await Person.getPersonByUsername(client, username);
 
 			if (user !== undefined) {
-				const userToSend = {
-					id: user.id,
-					username: username,
-					password: user.password,
-					lastName: user.lastName,
-					firstName: user.firstName,
-					birthDate: new Date(user.birthDate),
-					gender: user.gender,
-					phoneNumber: user.phoneNumber,
-					email: user.email,
-					address: {
-						id: user.addressId,
-						street: user.street,
-						number: user.number,
-						city: user.city,
-						postalCode: user.postalCode,
-						country: user.country
-					}
-				};
-
-				res.json(userToSend);
+				res.json(user);
 			} else res.sendStatus(404);
 		} catch (error) {
 			console.log(error);
@@ -59,27 +39,7 @@ module.exports.getUserByPhoneNumber = async (req, res) => {
 			const user = await Person.getPersonByPhoneNumber(client, phoneNumber);
 
 			if (user !== undefined) {
-				const userToSend = {
-					id: user.id,
-					username: user.username,
-					password: user.password,
-					lastName: user.lastName,
-					firstName: user.firstName,
-					birthDate: new Date(user.birthDate),
-					gender: user.gender,
-					phoneNumber: phoneNumber,
-					email: user.email,
-					address: {
-						id: user.addressId,
-						street: user.street,
-						number: user.number,
-						city: user.city,
-						postalCode: user.postalCode,
-						country: user.country
-					}
-				};
-
-				res.json(userToSend);
+				res.json(user);
 			} else res.sendStatus(404);
 		} catch (error) {
 			console.log(error);
