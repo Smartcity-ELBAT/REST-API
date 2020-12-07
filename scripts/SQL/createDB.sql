@@ -140,6 +140,7 @@ VALUES (2, 6, false);
 insert into access_level(access_level) values ( 'customer' );
 insert into access_level(access_level) values ( 'admin' );
 insert into access_level(access_level, establishment_id) values ( 'waiter_E1',  1);
+insert into access_level(access_level, establishment_id) values ( 'waiter_E2',  2);
 
 insert into reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id)
 VALUES (1, '2020-10-12 20:30', null, null, 4, null, null, 1, 1);
