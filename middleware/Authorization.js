@@ -7,9 +7,6 @@
  */
 
 module.exports.mustBeAdmin = (req, res, next) => {
-    console.log(req.session);
-    console.log(req.session.authLevels);
-
     if(req.session !== undefined && accessLevel (req.session.authLevels) === "admin"){
         next();
     } else {
