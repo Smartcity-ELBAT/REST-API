@@ -5,6 +5,23 @@ const pool = require("../model/database");
 const Person = require("../model/person");
 const AccessLevel = require("../model/accessLevel");
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Login:
+ *          type: object
+ *          properties:
+ *              username:
+ *                  type: string
+ *              password:
+ *                  type: string
+ *                  format: password
+ *          required:
+ *              - username
+ *              - password
+ */
+
 module.exports.login = async (req, res) => {
 	const { username, password } = req.body;
 
@@ -44,8 +61,7 @@ module.exports.login = async (req, res) => {
 						}
 					}
 				}
-				// TODO réfléchir à la durée du token, 24h me semble long
-				const token = jwt.sign(payload, process.env.JWT_TOKEN, { expiresIn: "24h"});
+				const token = jwt.sign(payload, process.env.JWT_TOKEN, { expiresIn: "14h"});
 				res.json(token);
 			}
 		} catch (error) {
