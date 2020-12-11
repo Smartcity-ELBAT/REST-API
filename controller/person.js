@@ -13,7 +13,7 @@ module.exports.getUser = async (req, res) => {
 		const client = await pool.connect();
 
 		try {
-			const user = await Person.getPersonByUsername(client, username);
+			const user = await Person.getPersonByUsername(client, username.toLowerCase());
 
 			if (user !== undefined) {
 				res.json(user);
@@ -43,6 +43,28 @@ module.exports.getUserByPhoneNumber = async (req, res) => {
 			} else res.sendStatus(404);
 		} catch (error) {
 			console.log(error);
+			res.sendStatus(500);
+		} finally {
+			client.release();
+		}
+	}
+}
+
+module.exports.getUsersByEstablishmentId = async (req, res) => {
+	const establishmentId = req.params.establishmentId;
+
+	if (establishmentId === undefined)
+		res.sendStatus(400);
+	else {
+		const client = await pool.connect();
+
+		try {
+			const {rows: users} = await Person.getUsersByEstablishmentId(client, establishmentId);
+
+			if (users !== undefined) res.json(users);
+			else res.sendStatus(404);
+		} catch (e) {
+			console.log(e);
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -145,14 +167,14 @@ module.exports.updateUser = async (req, res) => {
 				res.sendStatus(updatedUserRows.rowCount !== 0 ? 200 : 404);
 			} else {
 			  await client.query("ROLLBACK");
-				 
+
         res.sendStatus(404);
       }
 		} catch (e) {
 			console.log(e);
-      
+
 			await client.query("ROLLBACK");
-      
+
 			res.sendStatus(500);
 		} finally {
 			client.release();
@@ -172,7 +194,7 @@ module.exports.linkUserToEstablishment = async (req, res) => {
 			await client.query("BEGIN");
 
 			const updatedRows = await Person.linkToEstablishment(client, userId, establishmentId);
-			
+
 			res.sendStatus(updatedRows.count !== 0 ? 200 : 404);
 			await client.query("COMMIT");
 		} catch (e) {
@@ -193,7 +215,7 @@ module.exports.unlinkUserFromEstablishment = async (req, res) => {
 		res.sendStatus(400);
 	} else {
 		const client = await pool.connect();
-		
+
 		try {
 			await client.query("BEGIN");
 
@@ -225,7 +247,7 @@ module.exports.updatePassword = async (req, res) => {
 			const user = await Person.getPersonByUsername(client, username);
 
 			if (matchPasswords(currentPassword, user.password)) {
-				const updatedRows = await Person.updatePassword(client, user.id, getPasswordHash(newPassword));
+				const updatedRows = await Person.updatePassword(client, user.id, await getPasswordHash(newPassword));
 
 				res.sendStatus(updatedRows.rowCount !== 0 ? 200 : 404);
 
