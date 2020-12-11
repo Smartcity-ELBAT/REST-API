@@ -1,3 +1,11 @@
+/**
+ *@swagger
+ * components:
+ *  responses:
+ *      mustBeAdmin:
+ *          description: L'action demandée ne peut être réalisée que par un administrateur
+ */
+
 module.exports.mustBeAdmin = (req, res, next) => {
     if(req.session !== undefined && accessLevel (req.session.authLevels) === "admin"){
         next();
@@ -5,6 +13,14 @@ module.exports.mustBeAdmin = (req, res, next) => {
         res.sendStatus(403);
     }
 }
+
+/**
+ *@swagger
+ * components:
+ *  responses:
+ *      mustBeWaiter:
+ *          description: L'action demandée ne peut être réalisée que par un serveur
+ */
 
 module.exports.mustBeWaiter = (req, res, next) => {
     if(req.session !== undefined && accessLevel (req.session.authLevels) === "waiter"){
