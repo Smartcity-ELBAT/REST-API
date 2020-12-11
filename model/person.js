@@ -35,6 +35,19 @@ module.exports.getPersonByPhoneNumber = async (client, phoneNumber) => {
 	`, [ phoneNumber ])).rows[0];
 }
 
+module.exports.getUsersByEstablishmentId = async (client, establishmentId) => {
+	return await client.query(`
+		SELECT person.id, username, password, last_name AS "lastName", first_name AS "firstName",
+               birth_date AT TIME ZONE 'Europe/Brussels' AS "birthDate", gender, phone_number AS "phoneNumber", email,
+               address.id AS "addressId", street, number, country, locality_city AS city,
+               postal_code AS "postalCode"
+		FROM person
+		JOIN address on person.address_id = address.id
+		JOIN user_access_level ual on person.id = ual.user_id
+		WHERE access_level = $1;
+	`, [`waiter_E` + establishmentId]);
+}
+
 module.exports.getAllUsers = async (client) => {
 	return await client.query(`
 		SELECT person.id, username, password, last_name AS "lastName", first_name AS "firstName",
