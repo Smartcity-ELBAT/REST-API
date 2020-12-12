@@ -23,8 +23,6 @@ module.exports.addEstablishment = async (client, name, phoneNumber, VATNumber, e
 	`)).rows[0].id;
 }
 
-
-
 module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATNumber, email, category) => {
 	return await client.query(`
 		UPDATE establishment SET name = $1, phone_number = $2, vat_number = $3, email = $4, category = $5 WHERE id = $6;

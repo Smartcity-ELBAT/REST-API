@@ -97,7 +97,7 @@ module.exports.patchEstablishment = async (req, res) => {
  *components:
  *  responses:
  *      EstablishmentDeleted:
- *          description: L'établissement a été supprimé
+ *          description: L'établissement a été supprimé ainsi que toutes ses tables, ses réversations et ses liens avec les employés
  *      DeleteEstablishmentBadRequest:
  *          description: L'id de l'établissement doit être définit
  *  requestBodies:
