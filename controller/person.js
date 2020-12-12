@@ -345,8 +345,8 @@ module.exports.addUser = async (req, res) => {
  *                  schema:
  *                      type: object
  *                      properties:
- *                          id:
- *                              type: integer
+ *                          username:
+ *                              type: string
  *                          firstName:
  *                              type: string
  *                          lastName:
@@ -375,7 +375,6 @@ module.exports.addUser = async (req, res) => {
  *                                  postalCode:
  *                                      type: string
  *                      required:
- *                          - id
  *                          - firtsName
  *                          - lastName
  *                          - birthDate
@@ -554,8 +553,6 @@ module.exports.unlinkUserFromEstablishment = async (req, res) => {
  *                              type: string
  *                              format: password
  *                      required:
- *                          - username
- *                          - currentPassword
  *                          - newPassword
  */
 

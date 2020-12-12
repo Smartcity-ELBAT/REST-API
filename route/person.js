@@ -284,6 +284,8 @@ router.post("/", IdentificationJWTMiddleWare.identification, Controller.addUser)
  *              $ref: '#/components/responses/UnauthorizedJWT'
  *          404:
  *              description: L'utilisateur ou son adresse n'a pas été trouvé dans la base de données
+ *          403:
+ *              desciption: Seul l'administrateur peut modifier une autre personne que lui-même
  *          500:
  *              description: Erreur serveur
  */
