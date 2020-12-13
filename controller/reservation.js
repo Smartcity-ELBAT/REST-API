@@ -76,25 +76,36 @@ module.exports.addReservation = async (req, res) => {
  *      properties:
  *         person_id:
  *           type: integer
- *         date_time_reserved:
+ *         dateTimeReserved:
  *            type: string
  *            format: date-time
- *         arriving_time:
+ *         arrivingTime:
  *           type: string
  *           format: time
- *         exit_time:
+ *         exitTime:
  *           type: string
  *           format: time
- *         customer_nbr:
+ *         customerNbr:
  *           type: integer
- *         additionnal_info:
+ *         additionnalInfo:
  *           type: string
- *         is_cancelled:
+ *         isCancelled:
  *           type: boolean
- *         table_id:
+ *         tableId:
  *           type: integer
- *         establishment_id:
- *           type: integer
+ *         customer:
+ *           type: object
+ *           properties:
+ *              username:
+ *                type: string
+ *              lastName:
+ *                type: string
+ *              firstName:
+ *                type: string
+ *              phoneNumber:
+ *                type: string
+ *              email:
+ *                type: string
  */
 
 /**

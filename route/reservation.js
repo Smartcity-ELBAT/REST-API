@@ -81,7 +81,7 @@ router.get("/client/:idClient", IdentificationJWTMiddleWare.identification, Rese
 /**
  * @swagger
  *
- * /reservation/day/{dateTimeReserved}:
+ * /reservation/{establishmentId}/{dateTimeReserved}:
  *  get:
  *      tags:
  *          - Reservation
@@ -89,6 +89,12 @@ router.get("/client/:idClient", IdentificationJWTMiddleWare.identification, Rese
  *          - bearerAuth: []
  *      description: Renvoie toutes les réservations d'un jour
  *      parameters:
+ *        - name: establishmentId
+ *          description: établissement pour lequel on veut les réservations du jour
+ *          in: path
+ *          required: true
+ *          schema:
+ *            type: integer
  *        - name: dateTimeReserved
  *          description: jour au format YYYY-MM-DD
  *          in: path
@@ -105,7 +111,7 @@ router.get("/client/:idClient", IdentificationJWTMiddleWare.identification, Rese
  *          403:
  *              $ref: '#/components/responses/mustBeWaiter'
  *          404:
- *              description: Les réservations du jour n'ont pas été trouvées
+ *              description: Les réservations du jour our cet établissement n'ont pas été trouvées
  *          500:
  *              description: Erreur serveur
  */
