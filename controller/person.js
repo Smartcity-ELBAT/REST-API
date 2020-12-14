@@ -310,7 +310,7 @@ module.exports.addUser = async (req, res) => {
 				firstName,
 				birthDate,
 				gender,
-				phoneNumber,
+				phoneNumber.replace(/\/?\.?-?/, ""),
 				email,
 				addressId
 			);
@@ -390,36 +390,50 @@ module.exports.addUser = async (req, res) => {
  */
 
 module.exports.updateUser = async (req, res) => {
-	const { id, firstName, lastName, birthDate, gender, phoneNumber, email } = req.body
-	const { id: addressId, street, number, postalCode, city, country } = req.body.address;
+	const { firstName, lastName, birthDate, gender, phoneNumber, email } = req.body
+	const { street, number, postalCode, city, country } = req.body.address;
+	let { id } = req.body;
+	let { id: addressId } = req.body.address;
 
-	if (!allDefined(lastName, firstName, birthDate, gender, phoneNumber, email, street, number, country, city, postalCode)
-		|| !numericValues(id, addressId))
+	if (!allDefined(lastName, firstName, birthDate, gender, phoneNumber, email, street, number, country, city, postalCode))
 		res.sendStatus(400);
 	else {
-		const client = await pool.connect();
+		if (
+			((id !== undefined && id !== req.session.id)
+				|| (addressId !== undefined && addressId !== req.session.addressId))
+			&& req.session.authLevels.filter(authLevel => authLevel.accessLevel !== "admin").size === 1
+		)
+			res.sendStatus(403);
+		else {
+			id = id !== undefined ? id : req.session.id;
+			addressId = addressId !== undefined ? addressId : req.session.addressId;
 
-		try {
-			await client.query("BEGIN");
-			const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, country, city, postalCode);
+			const client = await pool.connect();
 
-			if (updatedAddressRows.rowCount !== 0) {
-				const updatedUserRows = await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber, email);
+			try {
+				await client.query("BEGIN");
+        
+        const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, country, city, postalCode);
 
-  				await client.query("COMMIT");
-				res.sendStatus(updatedUserRows.rowCount !== 0 ? 204 : 404);
-			} else {
-			  await client.query("ROLLBACK");
-			  res.sendStatus(404);
-      		}
-		} catch (e) {
-			console.log(e);
+				if (updatedAddressRows.rowCount !== 0) {
+					const updatedUserRows = await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber, email);
 
-			await client.query("ROLLBACK");
+					await client.query("COMMIT");
+					res.sendStatus(updatedUserRows.rowCount !== 0 ? 204 : 404);
+				} else {
+					await client.query("ROLLBACK");
 
-			res.sendStatus(500);
-		} finally {
-			client.release();
+					res.sendStatus(404);
+				}
+			} catch (e) {
+				console.log(e);
+
+				await client.query("ROLLBACK");
+
+				res.sendStatus(500);
+			} finally {
+				client.release();
+			}
 		}
 	}
 }
@@ -557,36 +571,47 @@ module.exports.unlinkUserFromEstablishment = async (req, res) => {
  */
 
 module.exports.updatePassword = async (req, res) => {
-	const { username, currentPassword, newPassword } = req.body;
+	const { newPassword } = req.body;
+	let { username, currentPassword } = req.body;
 
-	if (!allDefined(username, currentPassword, newPassword))
-		res.sendStatus(400);
+	if (!allDefined(newPassword)) res.sendStatus(400);
 	else {
-		const client = await pool.connect();
+		if (
+			((username !== undefined && username !== req.session.username)
+				|| (currentPassword !== undefined && currentPassword !== req.session.addressId))
+			&& req.session.authLevels.filter(authLevel => authLevel.accessLevel !== "admin").size === 1
+		)
+			res.sendStatus(403);
+		else {
+			username = username !== undefined ? username : req.session.username;
+			currentPassword = currentPassword !== undefined ? currentPassword : req.session.password;
 
-		try {
-			await client.query("BEGIN");
+			const client = await pool.connect();
 
-			const user = await Person.getPersonByUsername(client, username);
+			try {
+				await client.query("BEGIN");
 
-			if (matchPasswords(currentPassword, user.password)) {
-				const updatedRows = await Person.updatePassword(client, user.id, await getPasswordHash(newPassword));
+				const user = await Person.getPersonByUsername(client, username);
 
-				res.sendStatus(updatedRows.rowCount !== 0 ? 204 : 404);
+				if (matchPasswords(currentPassword, user.password)) {
+					const updatedRows = await Person.updatePassword(client, user.id, await getPasswordHash(newPassword));
 
-				await client.query("COMMIT");
-			} else {
+					res.sendStatus(updatedRows.rowCount !== 0 ? 204 : 404);
+
+					await client.query("COMMIT");
+				} else {
+					await client.query("ROLLBACK");
+
+					res.sendStatus(401);
+				}
+			} catch (e) {
+				console.log(e);
+
 				await client.query("ROLLBACK");
-
-				res.sendStatus(401);
+				res.sendStatus(500);
+			} finally {
+				client.release();
 			}
-		} catch (e) {
-			console.log(e);
-
-			await client.query("ROLLBACK");
-			res.sendStatus(500);
-		} finally {
-			client.release();
 		}
 	}
 }

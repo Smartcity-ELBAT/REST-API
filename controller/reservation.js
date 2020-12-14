@@ -165,15 +165,37 @@ module.exports.getClientReservations = async (req,res) => {
  */
 
 module.exports.getDayReservations = async (req, res) => {
+    const { establishmentId } = req.params;
     const day = req.params.dateTimeReserved; // format YYYY-MM-DD
     if(day === undefined) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();
         try {
-            const {rows : reservations } = await ReservationModel.getDayReservations(client, day);
+            const {rows : reservations } = await ReservationModel.getDayReservations(client, day, establishmentId);
             if(reservations.length !== 0) {
-                res.json(reservations);
+                const result = reservations.map(reservation => {
+                    return {
+                        personId: reservation.personId,
+                        dateTimeReserved: reservation.dateTimeReserved,
+                        arrivingTime: reservation.arrivingTime,
+                        exitTime: reservation.exitTime,
+                        customersNbr: reservation.customersNbr,
+                        additionalInfo: reservation.additionalInfo,
+                        isCancelled: reservation.isCancelled,
+                        tableId: reservation.tableId,
+                        isOutside: reservation.isOutside,
+                        customer: {
+                            username: reservation.username,
+                            lastName: reservation.lastName,
+                            firstName: reservation.firstName,
+                            phoneNumber: reservation.phoneNumber,
+                            email: reservation.email
+                        }
+                    }
+                });
+
+                res.json(result);
             } else {
                 res.sendStatus(404);
             }
@@ -274,7 +296,7 @@ module.exports.updateArrivingTime = async (req, res) => {
 
 module.exports.updateExitTime = async (req, res) => {
     const {idPerson, dateTimeReserved, exitTime} = req.body;
-    if(isNaN(idPerson) || allDefined(dateTimeReserved, exitTime))
+    if(isNaN(idPerson) || !allDefined(dateTimeReserved, exitTime))
         res.sendStatus(400);
     else {
         const client = await pool.connect();

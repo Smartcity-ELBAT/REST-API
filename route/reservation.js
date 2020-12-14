@@ -116,7 +116,7 @@ router.get("/client/:idClient", IdentificationJWTMiddleWare.identification, Rese
  *              description: Erreur serveur
  */
 
-router.get("/day/:dateTimeReserved", IdentificationJWTMiddleWare.identification, AuthorizationMiddleWare.mustBeWaiter, ReservationController.getDayReservations);
+router.get("/:establishmentId/:dateTimeReserved", IdentificationJWTMiddleWare.identification, AuthorizationMiddleWare.mustBeWaiter, ReservationController.getDayReservations);
 
 /**
  * @swagger

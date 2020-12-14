@@ -203,3 +203,6 @@ dist
 Vagrantfile
 .idea/dataSources.xml
 .idea/sqldialects.xml
+
+### Auto-generated Documentation ###
+swagger/spec.json
