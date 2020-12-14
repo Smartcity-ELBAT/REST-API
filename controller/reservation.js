@@ -93,6 +93,8 @@ module.exports.addReservation = async (req, res) => {
  *           type: boolean
  *         tableId:
  *           type: integer
+ *         isOutside:
+ *            type: boolean
  *         customer:
  *           type: object
  *           properties:
