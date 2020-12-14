@@ -1,5 +1,5 @@
 module.exports.getEstablishment = async (client, id) => {
-    return await client.query("SELECT * FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code WHERE e.id = $1", [id]);
+    return await client.query(`SELECT e.address_id AS "addressId", e.category, l.city, a.country, e.email, e.id, a.locality_city AS "locality", e.name, a.number, e.phone_number AS "phoneNumber", l.postal_code AS "postalCode", a.street, e.vat_number AS "VATNumber" FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code WHERE e.id = $1`, [id]);
 }
 
 module.exports.getAllEstablishments = async (client) => {
@@ -22,8 +22,6 @@ module.exports.addEstablishment = async (client, name, phoneNumber, VATNumber, e
 		SELECT id, LAST_VALUE (id) OVER(ORDER BY id DESC) id FROM establishment;
 	`)).rows[0].id;
 }
-
-
 
 module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATNumber, email, category) => {
 	return await client.query(`
