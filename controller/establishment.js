@@ -73,15 +73,14 @@ module.exports.patchEstablishment = async (req, res) => {
 			const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, city, postalCode, country);
 
 			if (updatedAddressRows.rowCount !== 0) {
-				const updatedEstablishmentRows = await Establishment.updateEstablishment(client, id, name, phoneNumber, VATNumber, email, category);
+				const updatedEstablishmentRows = await Establishment.updateEstablishment(client, id, name, phoneNumber.replace(/\/?\.?-?/, ""), VATNumber, email, category);
 
 				res.sendStatus(updatedEstablishmentRows !== 0 ? 204 : 404);
 			  await client.query("COMMIT");
             } else {
 				res.sendStatus(404);
-        await client.query("ROLLBACK");
-      }
-			
+				await client.query("ROLLBACK");
+			}
 		} catch (error) {
 			await client.query("ROLLBACK");
             console.log(error);
@@ -132,10 +131,10 @@ module.exports.deleteEstablishment = async (req, res) => {
 			await client.query("COMMIT");
 		} catch (error) {
 			await client.query("ROLLBACK");
-      
-          console.log(error);
 
-          res.sendStatus(500);
+			console.log(error);
+
+			res.sendStatus(500);
 		} finally {
 			client.release();
 		}
@@ -310,7 +309,7 @@ module.exports.addEstablishment = async (req, res) => {
             await client.query("BEGIN");
 
             const idAddress = await Address.addAddress(client, street, number, country, city, postalCode);
-            const idEstablishment = await Establishment.addEstablishment(client, name, phoneNumber, VATNumber, email, category, idAddress);
+            const idEstablishment = await Establishment.addEstablishment(client, name, phoneNumber.replace(/\/?\.?-?/, ""), VATNumber, email, category, idAddress);
 
             await client.query("COMMIT");
             res.json(idEstablishment);

@@ -1,6 +1,5 @@
 const pool = require('../model/database');
 const ReservationModel = require("../model/reservation");
-const TableModel = require("../model/table");
 const { numericValues, allDefined } = require("../utils/values");
 
 module.exports.addReservation = async (req, res) => {
@@ -56,15 +55,37 @@ module.exports.getClientReservations = async (req,res) => {
 }
 
 module.exports.getDayReservations = async (req, res) => {
+    const { establishmentId } = req.params;
     const day = req.params.dateTimeReserved; // format YYYY-MM-DD
     if(day === undefined) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();
         try {
-            const {rows : reservations } = await ReservationModel.getDayReservations(client, day);
+            const {rows : reservations } = await ReservationModel.getDayReservations(client, day, establishmentId);
             if(reservations.length !== 0) {
-                res.json(reservations);
+                const result = reservations.map(reservation => {
+                    return {
+                        personId: reservation.personId,
+                        dateTimeReserved: reservation.dateTimeReserved,
+                        arrivingTime: reservation.arrivingTime,
+                        exitTime: reservation.exitTime,
+                        customersNbr: reservation.customersNbr,
+                        additionalInfo: reservation.additionalInfo,
+                        isCancelled: reservation.isCancelled,
+                        tableId: reservation.tableId,
+                        isOutside: reservation.isOutside,
+                        customer: {
+                            username: reservation.username,
+                            lastName: reservation.lastName,
+                            firstName: reservation.firstName,
+                            phoneNumber: reservation.phoneNumber,
+                            email: reservation.email
+                        }
+                    }
+                });
+
+                res.json(result);
             } else {
                 res.sendStatus(404);
             }
@@ -74,40 +95,6 @@ module.exports.getDayReservations = async (req, res) => {
 
             console.log(error);
         }finally {
-            client.release();
-        }
-    }
-}
-
-module.exports.updateReservation = async (req, res) => {
-    const {idPerson, dateTimeReserved, newDateTime, nbCustomers, addInfos, idTable, idEstablishment} = req.body
-
-    if (!numericValues(idPerson, nbCustomers, idTable, idEstablishment) || dateTimeReserved === undefined)
-        res.sendStatus(400);
-    else {
-        const client = await pool.connect();
-        try {
-            const table = await TableModel.getTable(client, idTable, idEstablishment);
-            if(table.rowCount === 0) {
-                res.sendStatus(404);
-            } else {
-                const rowsUpdated = await ReservationModel.updateReservation(client,
-                                                                            idPerson,
-                                                                            dateTimeReserved,
-                                                                            newDateTime === undefined ? dateTimeReserved : newDateTime,
-                                                                            nbCustomers,
-                                                                            addInfos,
-                                                                            idTable,
-                                                                            idEstablishment);
-
-                res.sendStatus(rowsUpdated.rowCount !== 0 ? 200 : 404);
-            }
-        } catch (error) {
-            console.log(error);
-            res.sendStatus(500);
-
-            console.log(error);
-        } finally {
             client.release();
         }
     }
@@ -139,7 +126,7 @@ module.exports.updateArrivingTime = async (req, res) => {
 
 module.exports.updateExitTime = async (req, res) => {
     const {idPerson, dateTimeReserved, exitTime} = req.body;
-    if(isNaN(idPerson) || allDefined(dateTimeReserved, exitTime))
+    if(isNaN(idPerson) || !allDefined(dateTimeReserved, exitTime))
         res.sendStatus(400);
     else {
         const client = await pool.connect();
