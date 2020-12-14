@@ -47,18 +47,7 @@ module.exports.login = async (req, res) => {
 						password: user.password,
 						lastName: user.lastName,
 						firstName: user.firstName,
-						birthDate: user.birthDate,
-						gender: user.gender,
-						phoneNumber: user.phoneNumber,
-						email: user.email,
-						address: {
-							id: user.addressId,
-							street: user.street,
-							number: user.number,
-							city: user.city,
-							postalCode: user.postalCode,
-							country: user.country
-						}
+						addressId: user.addressId,
 					}
 				}
 				const token = jwt.sign(payload, process.env.JWT_TOKEN, { expiresIn: "14h"});

@@ -2,7 +2,6 @@ const Controller = require("../controller/user");
 const Router = require("express-promise-router");
 const router = new Router;
 
-// TODO ne fonctionne pas
 /**
  * @swagger
  * /user/login:
