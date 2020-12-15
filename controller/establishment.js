@@ -126,9 +126,15 @@ module.exports.deleteEstablishment = async (req, res) => {
 			await client.query("BEGIN");
 
 			const deletedRows = await Establishment.deleteEstablishment(client, establishmentId);
-			res.sendStatus(deletedRows.rowCount !== 0 ? 204 : 404);
 
-			await client.query("COMMIT");
+			if(deletedRows.rowCount !== 0){
+                res.sendStatus(204);
+                await client.query("COMMIT");
+            } else {
+                res.sendStatus(404);
+                await client.query("ROLLBACK");
+            }
+
 		} catch (error) {
 			await client.query("ROLLBACK");
 
@@ -152,32 +158,26 @@ module.exports.deleteEstablishment = async (req, res) => {
  *           type: integer
  *         name:
  *           type : string
- *         phone_number:
+ *         phoneNumber:
  *           type: string
- *         vat_number:
+ *         VATNumber:
  *           type: string
  *         email:
  *           type: string
  *         category:
  *           type: string
- *         adresse:
- *           type: object
- *           properties:
- *             id:
- *               type: integer
- *             street:
- *               type: string
- *             number:
- *               type: string
- *             country:
- *               type: string
- *             locality:
- *               type: object
- *               properties:
- *                city:
- *                  type: string
- *                postal_code:
- *                  type: string
+ *         addressId:
+ *           type: integer
+ *         street:
+ *           type: string
+ *         number:
+ *           type: string
+ *         country:
+ *           type: string
+ *         city:
+ *           type: string
+ *         postalCode:
+ *           type: string
  */
 
 /**

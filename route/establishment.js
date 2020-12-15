@@ -116,7 +116,7 @@ router.get("/", IdentificationJWTMiddleWare.identification, EstablishmentControl
  *      requestBody:
  *          $ref: '#/components/requestBodies/EstablishmentToAdd'
  *      responses:
- *          201:
+ *          200:
  *              $ref: '#/components/responses/EstablishmentAdded'
  *          400:
  *              $ref: '#/components/responses/EstablishmentToAddBadRequest'

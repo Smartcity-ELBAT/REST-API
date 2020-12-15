@@ -114,7 +114,7 @@ router.get("/:idEstablishment", IdentificationJWTMiddleWare.identification, Tabl
  *              description: Erreur serveur
  */
 
-router.get("/:idEstablishment/:idTable", IdentificationJWTMiddleWare.identification, TableController.getTable); // TODO vérifier si on l'utilise
+router.get("/:idEstablishment/:idTable", IdentificationJWTMiddleWare.identification, TableController.getTable);
 
 /**
  * @swagger

@@ -2,6 +2,8 @@ const pool = require('../model/database');
 const TableModel = require('../model/table');
 const EstablishmentModel = require('../model/establishment');
 const { allDefined } = require("../utils/values");
+const { getPasswordHash, matchPasswords } = require("../utils/passwords");
+
 
 /**
  *@swagger
@@ -90,6 +92,9 @@ module.exports.addTable = async (req, res) => {
 
 module.exports.getAllTables = async (req, res) => {
     const idEstablishment = parseInt(req.params.idEstablishment);
+
+    console.log(await getPasswordHash("shizuo456"));
+
     if(isNaN(idEstablishment)){
         res.sendStatus(400);
     } else {
