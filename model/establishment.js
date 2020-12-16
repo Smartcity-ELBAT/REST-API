@@ -1,11 +1,40 @@
 module.exports.getEstablishment = async (client, id) => {
-    return await client.query(`SELECT e.address_id AS "addressId", e.category, l.city, a.country, e.email, e.id, a.locality_city AS "locality", e.name, a.number, e.phone_number AS "phoneNumber", l.postal_code AS "postalCode", a.street, e.vat_number AS "VATNumber" FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code WHERE e.id = $1`, [id]);
+    return await client.query(`SELECT
+								   e.id,
+								   e.name,
+								   e.phone_number AS "phoneNumber",
+								   e.vat_number AS "VATNumber",
+								   e.email,
+								   e.category,
+								   e.address_id AS "addressId",
+								   a.street,
+								   a.number,
+								   a.country,
+								   l.city, 
+       							   l.postal_code AS "postalCode" 
+								FROM establishment e 
+								    join address a on e.address_id = a.id 
+								    join locality l on l.city = a.locality_city and l.postal_code = a.postal_code 
+								WHERE e.id = $1`, [id]);
 }
 
 module.exports.getAllEstablishments = async (client) => {
-    return await client.query(`SELECT e.address_id AS "addressId", e.category, l.city, a.country, e.email, e.id, a.locality_city AS "locality", 
-       e.name, a.number, e.phone_number AS "phoneNumber", l.postal_code AS "postalCode", a.street, e.vat_number AS "VATNumber" 
-	   FROM establishment e join address a on e.address_id = a.id join locality l on l.city = a.locality_city and l.postal_code = a.postal_code`);
+    return await client.query(`SELECT
+								   e.id,
+								   e.name,
+								   e.phone_number AS "phoneNumber",
+								   e.vat_number AS "VATNumber",
+								   e.email,
+								   e.category,
+								   e.address_id AS "addressId",
+								   a.street,
+								   a.number,
+								   a.country,
+								   l.city,
+								   l.postal_code AS "postalCode"
+							   FROM establishment e
+										join address a on e.address_id = a.id
+										join locality l on l.city = a.locality_city and l.postal_code = a.postal_code`);
 }
 
 module.exports.addEstablishment = async (client, name, phoneNumber, VATNumber, email, category, idAddress) => {
@@ -30,24 +59,7 @@ module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATN
 }
 
 module.exports.deleteEstablishment = async (client, id) => {
-	return await client.query(`
-			DELETE FROM user_access_level WHERE access_level = $1
-		`, [ "waiter_E" + id ])
-			.then(
-				await client.query(`
-					DELETE FROM access_level WHERE access_level.access_level = $1
-				`, [ "waiter_E" + id ])
-			).then(
-				await client.query(`
-					DELETE FROM reservation WHERE establishment_id = $1
-                `, [ id ])
-			).then(
-				await client.query(`
-					DELETE FROM "table" WHERE establishment_id = $1
-                `, [ id ])
-			).then(
-				await client.query(`
-					DELETE FROM establishment WHERE id = $1;
-				`, [ id ])
-			);
+		return await client.query(`
+					DELETE FROM establishment WHERE id = $1 RETURNING *;
+	 			`, [ id ])
 }

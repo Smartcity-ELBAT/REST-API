@@ -55,10 +55,10 @@ module.exports.getAllUsers = async (client) => {
 	`);
 }
 
-module.exports.updatePersonalInfo = async (client, id, firstName, lastName, birthDate, gender, phoneNumber, email) => {
+module.exports.updatePersonalInfo = async (client, id, firstName, lastName, birthDate, gender, phoneNumber) => {
 	return await client.query(`
-		UPDATE person SET last_name = $1, first_name = $2, birth_date = $3, gender = $4, phone_number = $5, email = $6 WHERE id = $7
-	`, [ firstName, lastName, birthDate, gender, phoneNumber, email, id ]);
+		UPDATE person SET last_name = $1, first_name = $2, birth_date = $3, gender = $4, phone_number = $5 WHERE id = $6;
+	`, [ firstName, lastName, birthDate, gender, phoneNumber, id ]);
 }
 
 module.exports.updatePassword = async (client, id, password) => {

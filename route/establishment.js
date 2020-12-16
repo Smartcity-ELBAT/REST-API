@@ -50,7 +50,7 @@ const router = new Router;
  *          401:
  *              $ref: '#/components/responses/UnauthorizedJWT'
  *          404:
- *              description: Les établissements n'ont pas été trouvés
+ *              description: L'établissement n'a pas été trouvé
  *          500:
  *              description: Erreur serveur
  */
@@ -75,7 +75,7 @@ router.get("/:id",IdentificationJWTMiddleWare.identification, EstablishmentContr
  *          401:
  *              $ref: '#/components/responses/UnauthorizedJWT'
  *          404:
- *              description: Les tables de l'établissement n'ont pas été trouvées
+ *              description: Les établissements n'ont pas été trouvées
  *          500:
  *              description: Erreur serveur
  */
@@ -116,7 +116,7 @@ router.get("/", IdentificationJWTMiddleWare.identification, EstablishmentControl
  *      requestBody:
  *          $ref: '#/components/requestBodies/EstablishmentToAdd'
  *      responses:
- *          201:
+ *          200:
  *              $ref: '#/components/responses/EstablishmentAdded'
  *          400:
  *              $ref: '#/components/responses/EstablishmentToAddBadRequest'

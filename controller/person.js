@@ -390,12 +390,12 @@ module.exports.addUser = async (req, res) => {
  */
 
 module.exports.updateUser = async (req, res) => {
-	const { firstName, lastName, birthDate, gender, phoneNumber, email } = req.body
+	const { firstName, lastName, birthDate, gender, phoneNumber } = req.body
 	const { street, number, postalCode, city, country } = req.body.address;
 	let { id } = req.body;
 	let { id: addressId } = req.body.address;
 
-	if (!allDefined(lastName, firstName, birthDate, gender, phoneNumber, email, street, number, country, city, postalCode))
+	if (!allDefined(lastName, firstName, birthDate, gender, phoneNumber, street, number, country, city, postalCode))
 		res.sendStatus(400);
 	else {
 		if (
@@ -413,10 +413,9 @@ module.exports.updateUser = async (req, res) => {
 			try {
 				await client.query("BEGIN");
         
-        const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, country, city, postalCode);
-
+	            const updatedAddressRows = await Address.updateAddress(client, addressId, street, number, country, city, postalCode);
 				if (updatedAddressRows.rowCount !== 0) {
-					const updatedUserRows = await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber, email);
+					const updatedUserRows = await Person.updatePersonalInfo(client, id, firstName, lastName, birthDate, gender, phoneNumber);
 
 					await client.query("COMMIT");
 					res.sendStatus(updatedUserRows.rowCount !== 0 ? 204 : 404);
