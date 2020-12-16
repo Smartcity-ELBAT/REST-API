@@ -59,27 +59,6 @@ module.exports.updateEstablishment =  async (client, id, name, phoneNumber, VATN
 }
 
 module.exports.deleteEstablishment = async (client, id) => {
-	// return await client.query(`
-	// 		DELETE FROM user_access_level WHERE access_level = $1
-	// 	`, [ "waiter_E" + id ])
-	// 		.then(
-	// 			await client.query(`
-	// 				DELETE FROM access_level WHERE access_level.access_level = $1
-	// 			`, [ "waiter_E" + id ])
-	// 		).then(
-	// 			await client.query(`
-	// 				DELETE FROM reservation WHERE establishment_id = $1
-    //             `, [ id ])
-	// 		).then(
-	// 			await client.query(`
-	// 				DELETE FROM "table" WHERE establishment_id = $1
-    //             `, [ id ])
-	// 		).then(
-	// 			await client.query(`
-	// 				DELETE FROM establishment WHERE id = $1 RETURNING *;
-	// 			`, [ id ])
-	// 		);
-
 		return await client.query(`
 					DELETE FROM establishment WHERE id = $1 RETURNING *;
 	 			`, [ id ])
