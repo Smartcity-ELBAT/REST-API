@@ -33,7 +33,7 @@ const { allDefined } = require("../utils/values");
 
 module.exports.addTable = async (req, res) => {
     const {idEstablishment, nbSeats, isOutside} = req.body;
-    if(isNaN(idEstablishment) || isNaN(nbSeats) || !allDefined( isOutside)) {
+    if(isNaN(idEstablishment) || isNaN(nbSeats) || !allDefined(isOutside)) {
         res.sendStatus(400);
     } else {
         const client = await pool.connect();
@@ -196,4 +196,39 @@ module.exports.deleteTable = async (req, res) => {
     }
 }
 
+/**
+ *@swagger
+ *components:
+ *  responses:
+ *      ArrayOfTables:
+ *          description: Renvoie toutes les tables non occupées d'un établissement pour telle date
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Table'
+ *      AllTablesRetrievedBadRequest:
+ *          description: L'id de l'établissement doit être définis
+ */
 
+module.exports.getAllAvailableTables = async (req, res) => {
+    const establishmentId = parseInt(req.params.establishmentId);
+    const {chosenDate} = req.params;
+
+    if (isNaN(establishmentId))
+        res.sendStatus(400);
+    else {
+        const client = await pool.connect();
+
+        try {
+            const {rows: tables} = await TableModel.getAllAvailableTables(client, establishmentId, chosenDate);
+
+            res.json(tables);
+        } catch (error) {
+            console.log(error);
+
+            res.sendStatus(500);
+        } finally {
+            await client.release();
+        }
+    }
+}
