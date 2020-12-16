@@ -60,6 +60,44 @@ router.get("/:idEstablishment", IdentificationJWTMiddleWare.identification, Tabl
 /**
  * @swagger
  *
+ * /table/{idEstablishment}/{chosenDate}:
+ *  get:
+ *      tags:
+ *          - Table
+ *      security:
+ *          - bearerAuth: []
+ *      description: Renvoie la liste de toutes les tables libres d'un établissement pour une telle date
+ *      parameters:
+ *        - name: establishmentId
+ *          description: ID d'un établissement
+ *          in: path
+ *          required: true
+ *          schema:
+ *            type: integer
+ *        - name: chosenDate
+ *          description: Date pour laquelle la recherche est effectuée
+ *          in: path
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *          200:
+ *              $ref: '#/components/responses/ArrayOfTables'
+ *          400:
+ *              $ref: '#/components/responses/TablesToGetBadRequest'
+ *          401:
+ *              $ref: '#/components/responses/UnauthorizedJWT'
+ *          404:
+ *              description: Les tables de l'établissement n'ont pas été trouvées
+ *          500:
+ *              description: Erreur serveur
+ */
+
+router.get("/:establishmentId/:chosenDate", IdentificationJWTMiddleWare.identification, TableController.getAllAvailableTables);
+
+/**
+ * @swagger
+ *
  * components:
  *   responses:
  *     TableToGetBadRequest:
