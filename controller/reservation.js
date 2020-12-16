@@ -48,7 +48,7 @@ module.exports.addReservation = async (req, res) => {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
-            await ReservationModel.addReservation(client, idPerson, dateTimeReserved, nbCustomers, idTable, idEstablishment);
+            await ReservationModel.addReservation(client, idPerson, dateTimeReserved.replaceAll("T", " "), nbCustomers, idTable, idEstablishment);
 
             if(additionalInformation !== undefined)
                 await ReservationModel.updateAdditionalInformations(client, idPerson, dateTimeReserved, additionalInformation);
