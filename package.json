@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon app.js",
     "genDoc": "node ./swagger/swagger_jsdoc.js",
-    "initDB": "node ./scripts/JS/initDB.js"
+    "initDB": "node ./scripts/JS/initDB.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
