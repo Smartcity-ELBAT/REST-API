@@ -93,8 +93,6 @@ module.exports.addTable = async (req, res) => {
 module.exports.getAllTables = async (req, res) => {
     const idEstablishment = parseInt(req.params.idEstablishment);
 
-    console.log(await getPasswordHash("shizuo456"));
-
     if(isNaN(idEstablishment)){
         res.sendStatus(400);
     } else {
