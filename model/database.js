@@ -9,7 +9,7 @@ const dbDatabase = process.env.DB_DATABASE
 const dbPort = process.env.DB_PORT;
 
 const connectionString = `postgresql://${username}:${dbPassword}@${dbHost}:${dbPort}/${dbDatabase}`
-// ?ssl=true
+
 const pool = new Pool({
 	connectionString
 });
