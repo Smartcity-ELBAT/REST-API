@@ -177,40 +177,40 @@ INSERT INTO address (street, number, country, locality_city, postal_code) VALUES
 INSERT INTO address (street, number, country, locality_city, postal_code) VALUES ('Rue de la Pépinière', '106A', 'Belgique', 'Namur', '5002');
 
 
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('mary123', '$2b$10$GTjeVpITeh6K.Oh8oGq5NOn/Ywvd5Hnruc6HUCyfeCQF2hP6EdIW.', 'Crawley ', 'Mary', '1965-05-10', 'f', '0496395682', 'marie.crawley@gmail.com', null, 1 ); --pomme123
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('anna123', '$2b$10$5fixCge7j6I2BLSGlQ7eV.YGrKLaK.nsdglpZ4Hg3P2etvqUUCAvK', 'Bates', 'Anna', '1963-08-18', 'm', '0489526475', 'anna.bates@hotmail.be', null, 2 ); --poire123
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('john123', '$2b$10$7APucUJHm93.lIZYGuv.EegpIXWRu9VXKH4PfEwWzOXEScQCbiDfy', 'Bates', 'John', '1936-05-20', 'm', '0496357624', 'cora.crawley@gmail.com', null, 3 ); --kiwi123
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('shizuo456', '$2b$10$4aRLMSnLzMAmTUrTjevq2uyBCo6pjdsM/hST7N3lWqzMMk89HVBaG', 'Heiwajima', 'Shizuo', '1979-01-28', 'm', '0496253795', 'shizuo@gmail.com', null, 24 ); --shizuo456
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('drakexorn', '$2b$10$azieedal5tP9iu68ss4ffe/RIxPQ2DOFGPJH9jIdokHl2OCCBWdoW', 'Bernard', 'Christophe', '2000-01-10', 'M', '0471124035', 'drakexorn@gmail.com', null, 25);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('hunteroi', '$2b$10$VNk.AQ7fGMYMqdLQPT458OEUbcSASHq0v062oMv7ZNckf4L9OM4ma', 'Devresse', 'Tinaël', '1999-03-21', 'M', '+32498606060', 'me@tinaeldevresse.eu', null, 26);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('ebdrd_15', '$2b$10$6PM4H7ze0YP1aegddgBdyefE1uqqOnHy8kkUr3AvjgZgDBbXeFDd6', 'Badard', 'Eric', '1955-12-15', 'M', '0479825649', 'ericbadard@gmail.com', null, 27);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('jeansw0812', '$2b$10$6bO9oFpdeQhxyip81ZKOo.X6TBXsLpL95d6XnoFuhvZ3iR.YTHO02', 'Swartelé', 'Jean', '1939-09-15', 'M', '081461389', 'jeanswartele@gmail.com', null, 28);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('dalvyn', '$2b$10$DKOZlWBsu1WMlDlGFaoyLu3AGtmF74vJjORInx8/guG6/m6ESqmvm', 'Kingmaker', 'Dalvyn', '1982-12-03', 'M', '0478526594', 'dalvyn@pathfinder.com', null, 29);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('cpirotte', '$2b$10$MOBzawaXIqaUNc5UdlH0Lu2.yc49n0MYMFh44vR59xDwdmtlNwfpO', 'Pirotte', 'Cécile', '1983-07-07', 'F', '0477665585', 'cecile.pirotte@henallux.be', null, 30);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('seten_taisei', '$2b$10$Uh08Tqdq1av0UKyKedcaoOK1fxAmFJwdfoz4iLFc4NnBaEkx3um46', 'Chubaka', 'Romain', '1998-04-14', 'M', '0470557834', 'ros@odoo.com', null, 31);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('roi_arthur_de_bretage', '$2b$10$B4FXjB./4D5YqD0g3GOTxe5msHwkCv9QYAaMHf.IUgmUwVnocCo2a', 'Pandragon', 'Arthur', '1974-06-16', 'M', '00335529546', 'arthurus@legionromaine.it', null, 32);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('jsilverhand', '$2b$10$3XtiE5xWTGjQq02vM2mKDOIyuEhm13v9PyJs/djC0MVpMZGb0vGEq', 'Reeves', 'Keanu', '1964-09-02', 'M', '0048225196900', 'johnny.silverhand@cdprojektred.com', null, 33);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('natsusu', '$2b$10$6G4hoou4swyhnsvEjalfNuCz2fcTrr9aCMyYZq/c6nVI7/VVhB6dO', 'Natsuki', 'Subaru', '1997-10-22', 'M', '00815649812', 'subarunatsuki@rezero.jp', null, 34);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('madeline', '$2b$10$H7xalShuQkdlVilBVjj9tuf3Qn8sSKrBe4iIUBho9.qGZeuO21/tm', 'Celeste', 'Madeline', '1995-01-12', 'F', '0015962483', 'madeline@celeste.ca', null, 35);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('croft05', '$2b$10$DidX66qynt7ahUl.2S9N4ekAwc1Ocre/LYnZNyMBuutZ/lG1CZE4a', 'Croft', 'Lara', '1996-10-25', 'F', '0015144902000', 'lara@ubisoft.com', null, 36);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('gerard2rive', '$2b$10$PHZUFZkN8KROTl2PoQ2em.umBhNIx6AjjcOWOqo1axF.pfkqcL0o2', 'Gérard', 'De Rive', '1987-02-12', 'M', '0484705506', 'gerardderive@outlook.be', null, 37);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('fordringt', '$2b$10$4yNVACNK054EDITUE9U6Fe0pDX.sv6Gw3pUwX3NLhZq7O92gUHDs2', 'Tirion', 'Fordring', '1957-09-05', 'M', '089562658', 'tirionfordring@hotmail.fr', null, 38);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('xxdemonhunterxx', '$2b$10$PGDRynGykXlixw3KtLNm4u47cAEeldVg3VwOcyJYNTzyW23j8//Cm', 'Valla', 'Hatred', '1996-05-14', 'F', '0478700717', 'Va11a@hotmail.fr', null, 39);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('queenofblades', '$2b$10$tCMWy.v5cg0/KzefiyXvoe5AXgdnVbKCZ2m6zR0nctwbSrNq7Zb32', 'Sarah', 'Kerrigan', '1997-06-03', 'F', '084759865', 'kerrigans@outlook.be', null, 40);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('archenemy', '$2b$10$II1nkWCwlwBlJ.f9U9pGR.xP98jmdUgLd/b2RvyrektNJyYkJ9T7C', 'Alissa', 'White-Gluz', '1985-07-31', 'F', '082569878', 'alissawg@outlook.fr', null, 41);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('secretagentcooper', '$2b$10$sQwqbGElv7UMOMNZSx0GpO6mIIk8nu8oN9.SvxNkEGS5h0mg71YUa', 'Dale', 'Cooper', '1954-04-19', 'M', '086321545', 'cooper@fbi.us', null, 42);
-insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('joecloclo', '$2b$10$gz2x7yGiP7U2demZhd8YAeEO8tAetyKDpRfR1wonfeG/DBEKJJ41i', 'L''Clodo', 'Joe', '1962-09-26', 'M', '0476852951', 'joeclodo@sdf.be', null, 43);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('ryan711', '$2b$10$9lsKrHH10WvdudrdpQDonOKyLEmetOZCsKNdp/hxYYv.XHyo7c0WW', 'Cheron', 'Ryan', '2000-05-17', 'M', '0495898676', 'ryan.cheron@gmail.com', null, 45);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('chrichridlfg', '$2b$10$7q3xAZmUnvcTMRfPrs0/m./TrxBuLR33BnciAVZRgE.KQsOMc/uf2', 'Delforge', 'Christina', '1999-03-02', 'F', '0497676447', 'chrisdlfg@hotmail.com', null, 46);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('lennzuroux', '$2b$10$yzR7sg6zUlsRPGhcHL1ZYOMtTsYzrzs7TU6u.Vgef9Q0KU.CzPW1u', 'Wilderiane', 'Maxime', '1997-10-28', 'M', '0472659135', 'maximewilde@gmail.com', null, 47);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('marcow', '$2b$10$cXFx9VfzRJeo3T/TEuLiPuT5cSFUPAY4BFPeGGVi1MCBnC4it/g8u', 'Martinez', 'Marc-Anthony', '1994-01-14', 'M', '0033660746636', 'martinez.marc13500@gmail.com', null, 48);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('spartanix', '$2b$10$Djb1T9g65Qq5g7duySEWdeFnGtAm8/vsk5XqSs9MDiNozOeRckmr6', 'Marchal', 'Lucas', '2000-11-22', 'M', '0471250644', 'lucas.marchal2@hotmail.com', null, 49);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('herionj', '$2b$10$9ndcK9QfKfBWLXfWabzY5OtC1fJ7jTmrUB09CvrD4laDFuK.F0giO', 'Hérion', 'Jaina', '1999-08-26', 'O', '0479886337', 'jaina.herion@hotmail.com', null, 50);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('gluthos', '$2b$10$t3VhDl4yg2WhL/2UWz.MousJlWOLt1LfliuapwDgIWOdfoq/n7A66', 'Hennin', 'Augustin', '1996-12-27', 'M', '0491523193', 'augustin.hennin@henallux.be', null, 44);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('mikaot', '$2b$10$0u7s9KMvjk0Rk.23ds1oH.QaOSy/pkW8plVsiNu9RQQJ0tBmmkxFK', 'Ackerman', 'Mikasa', '1998-04-17', 'F', '0081', 'mikasa@aot.com', null, 51);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('tnook$$', '$2b$10$1Og2H7ABbY1aFv.5fmtVzeYutyrpRLaft9SabGEFJdhzmgOQXXfZC', 'Nook', 'Tom', '1976-05-30', 'M', '0496523349', 'tom@nook.inc', null, 52);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('slefranc', '$2b$10$2GIR.qf7BzhDsVAAnkzY/OboeW0svKa.bGHvD1.NgyPfGl/i7C6/O', 'Lefranc', 'Sandra', '2000-10-31', 'F', '0476773768', 'sandra.lefranc@gmail.com', null, 53);
-INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('bertauxf38', '$2b$10$O52Z.Fp0sWj887LRWbvYy.trsdge9vEoGTmZ2QWU5G6HSxfrY2vH6', 'Bertaux', 'Florine', '1999-09-10', 'F', '0476591346', 'florine.bertaux@henallux.be', null, 54);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('mary123', '$2b$10$GTjeVpITeh6K.Oh8oGq5NOn/Ywvd5Hnruc6HUCyfeCQF2hP6EdIW.', 'Crawley ', 'Mary', '1965-05-10', 'f', '0496395682', 'marie.crawley@gmail.com', false, 1 ); --pomme123
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('anna123', '$2b$10$5fixCge7j6I2BLSGlQ7eV.YGrKLaK.nsdglpZ4Hg3P2etvqUUCAvK', 'Bates', 'Anna', '1963-08-18', 'm', '0489526475', 'anna.bates@hotmail.be',false, 2 ); --poire123
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('john123', '$2b$10$7APucUJHm93.lIZYGuv.EegpIXWRu9VXKH4PfEwWzOXEScQCbiDfy', 'Bates', 'John', '1936-05-20', 'm', '0496357624', 'cora.crawley@gmail.com', false, 3 ); --kiwi123
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('shizuo456', '$2b$10$4aRLMSnLzMAmTUrTjevq2uyBCo6pjdsM/hST7N3lWqzMMk89HVBaG', 'Heiwajima', 'Shizuo', '1979-01-28', 'm', '0496253795', 'shizuo@gmail.com', false, 24 ); --shizuo456
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('drakexorn', '$2b$10$azieedal5tP9iu68ss4ffe/RIxPQ2DOFGPJH9jIdokHl2OCCBWdoW', 'Bernard', 'Christophe', '2000-01-10', 'M', '0471124035', 'drakexorn@gmail.com', false, 25);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('hunteroi', '$2b$10$VNk.AQ7fGMYMqdLQPT458OEUbcSASHq0v062oMv7ZNckf4L9OM4ma', 'Devresse', 'Tinaël', '1999-03-21', 'M', '+32498606060', 'me@tinaeldevresse.eu', false, 26);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('ebdrd_15', '$2b$10$6PM4H7ze0YP1aegddgBdyefE1uqqOnHy8kkUr3AvjgZgDBbXeFDd6', 'Badard', 'Eric', '1955-12-15', 'M', '0479825649', 'ericbadard@gmail.com', false, 27);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('jeansw0812', '$2b$10$6bO9oFpdeQhxyip81ZKOo.X6TBXsLpL95d6XnoFuhvZ3iR.YTHO02', 'Swartelé', 'Jean', '1939-09-15', 'M', '081461389', 'jeanswartele@gmail.com', false, 28);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('dalvyn', '$2b$10$DKOZlWBsu1WMlDlGFaoyLu3AGtmF74vJjORInx8/guG6/m6ESqmvm', 'Kingmaker', 'Dalvyn', '1982-12-03', 'M', '0478526594', 'dalvyn@pathfinder.com', false, 29);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('cpirotte', '$2b$10$MOBzawaXIqaUNc5UdlH0Lu2.yc49n0MYMFh44vR59xDwdmtlNwfpO', 'Pirotte', 'Cécile', '1983-07-07', 'F', '0477665585', 'cecile.pirotte@henallux.be', false, 30);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('seten_taisei', '$2b$10$Uh08Tqdq1av0UKyKedcaoOK1fxAmFJwdfoz4iLFc4NnBaEkx3um46', 'Chubaka', 'Romain', '1998-04-14', 'M', '0470557834', 'ros@odoo.com', false, 31);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('roi_arthur_de_bretage', '$2b$10$B4FXjB./4D5YqD0g3GOTxe5msHwkCv9QYAaMHf.IUgmUwVnocCo2a', 'Pandragon', 'Arthur', '1974-06-16', 'M', '00335529546', 'arthurus@legionromaine.it', false, 32);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('jsilverhand', '$2b$10$3XtiE5xWTGjQq02vM2mKDOIyuEhm13v9PyJs/djC0MVpMZGb0vGEq', 'Reeves', 'Keanu', '1964-09-02', 'M', '0048225196900', 'johnny.silverhand@cdprojektred.com', false, 33);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('natsusu', '$2b$10$6G4hoou4swyhnsvEjalfNuCz2fcTrr9aCMyYZq/c6nVI7/VVhB6dO', 'Natsuki', 'Subaru', '1997-10-22', 'M', '00815649812', 'subarunatsuki@rezero.jp', false, 34);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('madeline', '$2b$10$H7xalShuQkdlVilBVjj9tuf3Qn8sSKrBe4iIUBho9.qGZeuO21/tm', 'Celeste', 'Madeline', '1995-01-12', 'F', '0015962483', 'madeline@celeste.ca', false, 35);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('croft05', '$2b$10$DidX66qynt7ahUl.2S9N4ekAwc1Ocre/LYnZNyMBuutZ/lG1CZE4a', 'Croft', 'Lara', '1996-10-25', 'F', '0015144902000', 'lara@ubisoft.com', false, 36);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('gerard2rive', '$2b$10$PHZUFZkN8KROTl2PoQ2em.umBhNIx6AjjcOWOqo1axF.pfkqcL0o2', 'Gérard', 'De Rive', '1987-02-12', 'M', '0484705506', 'gerardderive@outlook.be', false, 37);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('fordringt', '$2b$10$4yNVACNK054EDITUE9U6Fe0pDX.sv6Gw3pUwX3NLhZq7O92gUHDs2', 'Tirion', 'Fordring', '1957-09-05', 'M', '089562658', 'tirionfordring@hotmail.fr', false, 38);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('xxdemonhunterxx', '$2b$10$PGDRynGykXlixw3KtLNm4u47cAEeldVg3VwOcyJYNTzyW23j8//Cm', 'Valla', 'Hatred', '1996-05-14', 'F', '0478700717', 'Va11a@hotmail.fr', false, 39);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('queenofblades', '$2b$10$tCMWy.v5cg0/KzefiyXvoe5AXgdnVbKCZ2m6zR0nctwbSrNq7Zb32', 'Sarah', 'Kerrigan', '1997-06-03', 'F', '084759865', 'kerrigans@outlook.be', false, 40);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('archenemy', '$2b$10$II1nkWCwlwBlJ.f9U9pGR.xP98jmdUgLd/b2RvyrektNJyYkJ9T7C', 'Alissa', 'White-Gluz', '1985-07-31', 'F', '082569878', 'alissawg@outlook.fr', false, 41);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('secretagentcooper', '$2b$10$sQwqbGElv7UMOMNZSx0GpO6mIIk8nu8oN9.SvxNkEGS5h0mg71YUa', 'Dale', 'Cooper', '1954-04-19', 'M', '086321545', 'cooper@fbi.us', false, 42);
+insert into person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) values ('joecloclo', '$2b$10$gz2x7yGiP7U2demZhd8YAeEO8tAetyKDpRfR1wonfeG/DBEKJJ41i', 'L''Clodo', 'Joe', '1962-09-26', 'M', '0476852951', 'joeclodo@sdf.be', false, 43);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('ryan711', '$2b$10$9lsKrHH10WvdudrdpQDonOKyLEmetOZCsKNdp/hxYYv.XHyo7c0WW', 'Cheron', 'Ryan', '2000-05-17', 'M', '0495898676', 'ryan.cheron@gmail.com', false, 45);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('chrichridlfg', '$2b$10$7q3xAZmUnvcTMRfPrs0/m./TrxBuLR33BnciAVZRgE.KQsOMc/uf2', 'Delforge', 'Christina', '1999-03-02', 'F', '0497676447', 'chrisdlfg@hotmail.com', false, 46);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('lennzuroux', '$2b$10$yzR7sg6zUlsRPGhcHL1ZYOMtTsYzrzs7TU6u.Vgef9Q0KU.CzPW1u', 'Wilderiane', 'Maxime', '1997-10-28', 'M', '0472659135', 'maximewilde@gmail.com', false, 47);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('marcow', '$2b$10$cXFx9VfzRJeo3T/TEuLiPuT5cSFUPAY4BFPeGGVi1MCBnC4it/g8u', 'Martinez', 'Marc-Anthony', '1994-01-14', 'M', '0033660746636', 'martinez.marc13500@gmail.com', false, 48);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('spartanix', '$2b$10$Djb1T9g65Qq5g7duySEWdeFnGtAm8/vsk5XqSs9MDiNozOeRckmr6', 'Marchal', 'Lucas', '2000-11-22', 'M', '0471250644', 'lucas.marchal2@hotmail.com', false, 49);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('herionj', '$2b$10$9ndcK9QfKfBWLXfWabzY5OtC1fJ7jTmrUB09CvrD4laDFuK.F0giO', 'Hérion', 'Jaina', '1999-08-26', 'O', '0479886337', 'jaina.herion@hotmail.com', false, 50);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('gluthos', '$2b$10$t3VhDl4yg2WhL/2UWz.MousJlWOLt1LfliuapwDgIWOdfoq/n7A66', 'Hennin', 'Augustin', '1996-12-27', 'M', '0491523193', 'augustin.hennin@henallux.be', false, 44);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('mikaot', '$2b$10$0u7s9KMvjk0Rk.23ds1oH.QaOSy/pkW8plVsiNu9RQQJ0tBmmkxFK', 'Ackerman', 'Mikasa', '1998-04-17', 'F', '0081', 'mikasa@aot.com', false, 51);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('tnook$$', '$2b$10$1Og2H7ABbY1aFv.5fmtVzeYutyrpRLaft9SabGEFJdhzmgOQXXfZC', 'Nook', 'Tom', '1976-05-30', 'M', '0496523349', 'tom@nook.inc', false, 52);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('slefranc', '$2b$10$2GIR.qf7BzhDsVAAnkzY/OboeW0svKa.bGHvD1.NgyPfGl/i7C6/O', 'Lefranc', 'Sandra', '2000-10-31', 'F', '0476773768', 'sandra.lefranc@gmail.com', false, 53);
+INSERT INTO person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('bertauxf38', '$2b$10$O52Z.Fp0sWj887LRWbvYy.trsdge9vEoGTmZ2QWU5G6HSxfrY2vH6', 'Bertaux', 'Florine', '1999-09-10', 'F', '0476591346', 'florine.bertaux@henallux.be', false, 54);
 
 
 INSERT INTO establishment (name, phone_number, vat_number, email, category, address_id) VALUES ('Sams Lunch', '0495786951', 'BE9874563210', 'samslunch@restau.be', 'sandwicherie', 4);
@@ -244,7 +244,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 4, false); --10
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (3, 2, true);
@@ -254,9 +254,9 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 4, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 6, false); --20
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 6, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 2, false);
@@ -264,7 +264,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (4, 2, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false); --30
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, false);
@@ -274,7 +274,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);--40
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (5, 2, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 4, false);
@@ -284,7 +284,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 2, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 2, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (6, 2, false);--50
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (7, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (7, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (7, 4, false);
@@ -294,7 +294,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 4, false);--60
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (8, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 4, false);
@@ -304,7 +304,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 4, fals
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);--70
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (9, 2, true);
@@ -314,7 +314,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, fal
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);--80
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (10, 6, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (11, 2, false);
@@ -324,7 +324,7 @@ INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (12, 4, tru
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (12, 4, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (12, 4, true);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (13, 4, false);
-INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (13, 4, false);
+INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (13, 4, false);--90
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (13, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (14, 4, false);
 INSERT INTO "table" (establishment_id, seats_nbr, is_outside) VALUES (14, 4, false);
@@ -442,23 +442,39 @@ INSERT INTO user_access_level (user_id, access_level) VALUES (34, 'customer');
 INSERT INTO user_access_level (user_id, access_level) VALUES (34, 'waiter_E14');
 
 
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (1, '2020-10-12 20:30:00.000000', null, null, 4, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-11-15 19:30:00.000000', null, null, 6, null, null, 4, 2);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-05-26 21:30:00.000000', null, null, 2, null, null, 3, 2);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (1, '2020-12-19 18:45:00.000000', null, null, 4, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-12-19 19:45:00.000000', null, null, 6, null, null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (5, '2020-12-21 18:00:00.000000', null, null, 6, 'Près d''une fenêtre', null, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (1, '2020-10-12 20:30:00.000000', null, null, 4, null, false, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-11-15 19:30:00.000000', null, null, 6, null, false, 4, 2);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-05-26 21:30:00.000000', null, null, 2, null, false, 3, 2);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (1, '2020-12-19 18:45:00.000000', null, null, 4, null, false, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (2, '2020-12-19 19:45:00.000000', null, null, 6, null, false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (5, '2020-12-21 18:00:00.000000', null, null, 6, 'Près d''une fenêtre', false, 2, 1);
 INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (7, '2020-12-23 17:45:00.000000', null, null, 4, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (9, '2020-12-23 19:30:00.000000', null, null, 4, 'A une table calme', null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (11, '2021-01-03 18:30:00.000000', null, null, 3, null, null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (12, '2020-12-30 19:30:00.000000', null, null, 2, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (12, '2020-12-28 11:54:00.000000', null, null, 2, null, null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (14, '2020-12-31 19:45:00.000000', null, null, 1, null, null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (15, '2021-01-15 17:30:00.000000', null, null, 2, 'Près de la fenêtre', null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (16, '2021-01-15 11:55:00.000000', null, null, 4, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (18, '2021-01-16 20:45:00.000000', null, null, 2, null, null, 1, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (20, '2021-01-16 16:56:00.000000', null, null, 4, null, null, 2, 1);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (34, '2021-01-19 18:51:00.000000', null, null, 4, null, null, 14, 4);
-INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (25, '2021-01-18 20:30:00.000000', null, null, 1, null, null, 14, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (9, '2020-12-23 19:30:00.000000', null, null, 4, 'A une table calme', false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (11, '2021-01-03 18:30:00.000000', null, null, 3, null, false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (12, '2020-12-30 19:30:00.000000', null, null, 2, null, false, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (12, '2020-12-28 11:54:00.000000', null, null, 2, null, false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (14, '2020-12-31 19:45:00.000000', null, null, 1, null, false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (15, '2021-01-15 17:30:00.000000', null, null, 2, 'Près de la fenêtre', false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (16, '2021-01-15 11:55:00.000000', null, null, 4, null, false, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (18, '2021-01-16 20:45:00.000000', null, null, 2, null, false, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (20, '2021-01-16 16:56:00.000000', null, null, 4, null, false, 2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (34, '2021-01-19 18:51:00.000000', null, null, 4, null, false, 14, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (25, '2021-01-18 20:30:00.000000', null, null, 1, null, false, 14, 4);
 INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (30, '2020-12-22 19:51:00.000000', '13:54:00', '13:54:00', 4, null, false, 14, 4);
 INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (24, '2021-01-20 18:30:00.000000', null, null, 4, null, true, 14, 4);
+
+
+INSERT INTO public.address (street, number, country, locality_city, postal_code) VALUES ('rue des Pommes', '3', 'Belgique ', 'Naninne', '5100');
+INSERT INTO public.person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('nyssa', '$2b$10$E8R1tXRUr2t2l80pUq/og.nHaj6VHGjXDK9GROcMHYue5m6DVc/rm', 'Bodart', 'Aurélie', '1996-05-10', 'F', '0497390431', 'bodartaurelie2008@hotmail.com', false, 55);
+
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-01-26 19:15:00.000000', null, null, 4, 'près de la fenêtre', true, 1, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-10-05 20:30:00.000000', null, null, 2, null, false, 14, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-01-06 18:45:00.000000', null, null, 6, 'une chaise enfant supplémentaire', false, 10, 3);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-01-07 13:00:00.000000', null, null, 4, null, true, 3, 2);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-05-10 13:00:00.000000', null, null, 4, null, true, 88, 12);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-12-13 20:30:00.000000', null, null, 2, null, false, 90, 13);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-06-15 18:30:00.000000', null, null, 4, null, false, 81, 10);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-09-23 19:00:00.000000', null, null, 6, null, false, 61, 8);
+
+
+

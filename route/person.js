@@ -4,6 +4,9 @@ const Controller = require("../controller/person");
 const IdentificationJWTMiddleWare = require("../middleware/Identification");
 const AuthorizationMiddleWare = require("../middleware/Authorization");
 
+// Android
+router.get("/customer/:id", IdentificationJWTMiddleWare.identification, Controller.getUserById);
+
 /**
  * @swagger
  *
@@ -240,7 +243,8 @@ router.get("/all", IdentificationJWTMiddleWare.identification, AuthorizationMidd
  *              description: Erreur serveur
  */
 
-router.post("/", IdentificationJWTMiddleWare.identification, Controller.addUser);
+//router.post("/", IdentificationJWTMiddleWare.identification, Controller.addUser);
+router.post("/", Controller.addUser);
 
 /**
  * @swagger
