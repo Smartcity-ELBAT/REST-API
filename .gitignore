@@ -205,4 +205,4 @@ Vagrantfile
 .idea/sqldialects.xml
 
 ### Auto-generated Documentation ###
-swagger/spec.json
+swagger/**
