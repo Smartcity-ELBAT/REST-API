@@ -148,8 +148,6 @@ module.exports.checkReservationsContactCovid = async (req,res) => {
                 }
 
                 res.json(isPositifToCovid);
-            } else {
-                res.sendStatus(404);
             }
         } catch (error) {
             console.log(error);
