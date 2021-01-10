@@ -2,8 +2,6 @@ const pool = require('../model/database');
 const TableModel = require('../model/table');
 const EstablishmentModel = require('../model/establishment');
 const { allDefined } = require("../utils/values");
-const { getPasswordHash, matchPasswords } = require("../utils/passwords");
-
 
 /**
  *@swagger

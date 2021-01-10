@@ -125,28 +125,61 @@ module.exports.addReservation = async (req, res) => {
 
  */
 
-module.exports.getClientReservations = async (req,res) => {
-	const idClient = parseInt(req.params.idClient);
-	if(isNaN(idClient)) {
-		res.sendStatus(400);
-	} else {
-		const client = await pool.connect();
-		try {
-			const {rows : reservations } = await ReservationModel.getClientReservations(client, idClient);
-			if(reservations.length !== 0) {
-				res.json(reservations);
-			} else {
-				res.sendStatus(404);
-			}
-		} catch (error) {
-			console.log(error);
-			res.sendStatus(500);
+module.exports.checkReservationsContactCovid = async (req,res) => {
+    const idClient = parseInt(req.params.idClient);
+    if(isNaN(idClient)) {
+        res.sendStatus(400);
+    } else {
+        const client = await pool.connect();
+        try {
+            const {rows : reservations } = await ReservationModel.getClientReservations(client, idClient);
+            if(reservations.length !== 0) {
+                let isPositifToCovid;
 
-			console.log(error);
-		} finally {
-			client.release();
-		}
-	}
+                for(let reservation of reservations){
+                    const{rows : statusCovid} = await ReservationModel.checkReservationsContactCovid(client, reservation.establishmentName, reservation.dateTimeReserved, idClient);
+                    if(statusCovid.length !== 0 && statusCovid.some(status => status.is_positive_to_covid_19 === true)){
+                        isPositifToCovid = {isPositifToCovid : true};
+                        break;
+                    }
+                    else{
+                        isPositifToCovid = {isPositifToCovid : false};
+                    }
+                }
+
+                res.json(isPositifToCovid);
+            } else {
+                res.sendStatus(404);
+            }
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        } finally {
+            client.release();
+        }
+    }
+}
+
+module.exports.getClientReservations = async (req,res) => {
+    const idClient = parseInt(req.params.idClient);
+    if(isNaN(idClient)) {
+        res.sendStatus(400);
+    } else {
+        const client = await pool.connect();
+        try {
+            const {rows : reservations } = await ReservationModel.getClientReservations(client, idClient);
+            if(reservations.length !== 0) {
+                res.json(reservations);
+            } else {
+                res.sendStatus(404);
+            }
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        } finally {
+            client.release();
+        }
+    }
 }
 
 /**

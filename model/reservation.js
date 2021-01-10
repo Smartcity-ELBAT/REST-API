@@ -5,6 +5,19 @@
 //  arrivingTime --> format HH24:MI
 //  exitTime --> format HH24:MI
 
+
+module.exports.checkReservationsContactCovid = async (client, establishmentName, dateTime, idClient) => {
+    return await client.query(`
+            SELECT p.is_positive_to_covid_19 
+            FROM person p
+            JOIN reservation r on p.id = r.person_id
+            JOIN establishment e on r.establishment_id = e.id
+            WHERE e.name = $1
+            AND r.date_time_reserved = $2
+            AND p.id != $3`,
+        [establishmentName, dateTime, idClient])
+}
+
 // Android
 module.exports.getClientReservations = async (client, idPerson) => {
     return await client.query(`

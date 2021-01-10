@@ -4,6 +4,8 @@ const ReservationController = require("../controller/reservation");
 const IdentificationJWTMiddleWare = require("../middleware/Identification");
 const AuthorizationMiddleWare = require("../middleware/Authorization");
 
+router.get("/covid/:idClient", IdentificationJWTMiddleWare.identification, ReservationController.checkReservationsContactCovid);
+
 /**
  * @swagger
  *
