@@ -477,4 +477,19 @@ INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time
 INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (35, '2021-09-23 19:00:00.000000', null, null, 6, null, false, 61, 8);
 
 
+INSERT INTO locality (city, postal_code) VALUES ('Sabadell', '08205');
+INSERT INTO public.address (street, number, country, locality_city, postal_code) VALUES ('Carrer de Saturn', '6', 'Espagne ', 'Sabadell', '08205');
+INSERT INTO public.person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('mrlechocobo', '$2b$10$tfbmrsFs5doUiTV7M.UMSuoHXducI1DR2aPCgrIwcUNE/47GZnCA6', 'Lemaire', 'Jonas', '1996-10-28', 'M', '0498395635', 'lemaire.jonas@hotmail.fr', false, 56);
 
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (36, '2021-01-26 19:15:00.000000', null, null, 4, 'une place pour une chaise roulante', false,2, 1);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (36, '2021-10-05 20:30:00.000000', null, null, 2, null, false, 15, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (36, '2021-01-06 18:45:00.000000', null, null, 6, 'une chaise enfant supplémentaire', true, 11, 3);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (36, '2021-01-07 13:00:00.000000', null, null, 4, null, true, 4, 2);
+
+INSERT INTO public.address (street, number, country, locality_city, postal_code) VALUES ('Rue des Bolettes', '3', 'Belgique ', 'Naninne', '5100');
+INSERT INTO public.person (username, password, last_name, first_name, birth_date, gender, phone_number, email, is_positive_to_covid_19, address_id) VALUES ('nicolas', '$2b$10$M5AmokKIc4gKNBbknFW5duM45zoFIJAeYBD1.q8i8VtCKWLBL.Ghe', 'Bodart', 'Nicolas', '2003-02-06', 'M', '0496352156', 'nicolas.bodart@hotmail.be', true, 57);
+
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (37, '2021-01-26 19:15:00.000000', null, null, 4, 'près de la fenêtre', true, 15, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (37, '2021-12-05 20:30:00.000000', null, null, 2, null, false, 15, 4);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (37, '2021-02-06 18:45:00.000000', null, null, 6, 'une chaise enfant supplémentaire', true, 11, 3);
+INSERT INTO reservation (person_id, date_time_reserved, arriving_time, exit_time, customers_nbr, additional_info, is_cancelled, table_id, establishment_id) VALUES (37, '2021-02-07 13:00:00.000000', null, null, 4, null, true, 4, 2);

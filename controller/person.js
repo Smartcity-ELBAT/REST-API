@@ -4,6 +4,26 @@ const pool = require("../model/database");
 const { getPasswordHash, matchPasswords } = require("../utils/passwords");
 const { allDefined, numericValues } = require("../utils/values");
 
+module.exports.updatePositiveToCovid = async (req, res) => {
+	const id = req.params.id;
+
+	if (isNaN(id))
+		res.sendStatus(400);
+	else {
+		const client = await pool.connect();
+		try {
+			const updatedRows = await Person.updatePositiveToCovid(client, id);
+			res.sendStatus(updatedRows.rowCount !== 0 ? 204 : 404);
+
+		} catch (e) {
+			console.log(e);
+			res.sendStatus(500);
+		} finally {
+			client.release();
+		}
+	}
+}
+
 //Android
 module.exports.getUserById = async (req, res) => {
 	const id = req.params.id;
@@ -636,7 +656,7 @@ module.exports.updatePassword = async (req, res) => {
 				await client.query("BEGIN");
 
 				const user = await Person.getPersonByUsername(client, username);
-				if(user != undefined){
+				if(user !== undefined){
 					if (await matchPasswords(currentPassword, user.password)) {
 						const updatedRows = await Person.updatePassword(client, user.id, await getPasswordHash(newPassword));
 

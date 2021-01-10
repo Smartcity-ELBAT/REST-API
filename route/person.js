@@ -4,6 +4,8 @@ const Controller = require("../controller/person");
 const IdentificationJWTMiddleWare = require("../middleware/Identification");
 const AuthorizationMiddleWare = require("../middleware/Authorization");
 
+router.patch("/updateCovid/:id", IdentificationJWTMiddleWare.identification, Controller.updatePositiveToCovid);
+
 // Android
 router.get("/customer/:id", IdentificationJWTMiddleWare.identification, Controller.getUserById);
 
